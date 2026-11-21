@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.0 (2026-11-21)
+
+Lessons from a live redesign in which four versions were rejected before one was approved: a token board shown first ("dummy samples"), a palette with eight color families ("too many colours, not mature"), a type-only page and a card-grid page ("boxy, AI-generated"). The approved version was product-led: real app screenshots cut out of rounded panels, callouts with leader lines, objects breaking card edges.
+
+### Both skills
+
+- New `references/creative-direction.md`: the client approves a real page or real screens first, the board follows; a composition or screen recipe; one panel color and one accent; a self-review table to run before showing anything.
+- New default 12 in each SKILL.md: a page (or screens) first, boards later. Phases 4 and 6 point to the new reference, and the anchor's "done when" includes the self-review and the client's approval of the live preview.
+
+### superdesign-react
+
+- `build.mjs` also loads `DrawSVGPlugin` and `MotionPathPlugin` with GSAP, and Lenis when config `"lenis"` names a version (`templates/config.example.json` sets `1.3.26`).
+- New `templates/src/components/Cutouts.tsx`: `Phone` (device frame around a real screenshot), `Callout` (glass note) and `Leads` (leader lines with breathing dots), plus `.phone-shadow`, `.phone-rim` and `.halo` in the template `styles.css`.
+- `references/motion.md`: product-led signature motion, the plugins, starting Lenis, and moving scrubbed copy out instead of fading it.
+- Lessons table: the client's "dummy samples / too many colours / boxy" feedback, hidden pinned copy, duplicate SVG gradient ids.
+
 ## 1.0.0 (2026-11-21)
 
 First public release. Both skills are rewrites of an internal HTML-to-WordPress Superdesign workflow, which is not included here.

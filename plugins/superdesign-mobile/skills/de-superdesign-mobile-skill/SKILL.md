@@ -28,6 +28,7 @@ This is the phone-app version of `de-superdesign-skill` (website drafts, WordPre
   - `references/motion.md`: static thumbnails, navigation transitions, sheets, press feedback, the Reanimated mapping.
   - `references/handoff-contract.md`: HTML to React Native mapping, tokens export, routes, the inventory.
   - `references/gotchas.md`: lessons that cost time, as a table.
+  - `references/creative-direction.md`: what the client approves first, the screen recipe, the self-review before showing a screen. Read before phases 4 and 6.
 
 ## Defaults (unless the user says otherwise)
 
@@ -42,6 +43,7 @@ This is the phone-app version of `de-superdesign-skill` (website drafts, WordPre
 9. **Personal data and placeholders.** Flag real names, photos and contact details as you meet them; invented copy and numbers get `data-placeholder` and a line in PLAN.md; never invent prices, trial terms or policy claims.
 10. **PLAN.md locally**; a Claude Doc only when the user asks. **Never merge pull requests**; humans merge. **Never change the app's code** in this skill: it designs and hands off.
 11. **Pass the authoring model** to imports (`--model <id>` or `DD_SD_MODEL`): it is recorded as `--generated-by`.
+12. **Screens first, boards later.** The first thing the client approves is two or three real screens of the main flow with real copy, sent as live preview links; the `00` board follows from the approved screens (`references/creative-direction.md`).
 
 ## Phases
 
@@ -92,6 +94,8 @@ App icon, logo, illustrations, onboarding art and real photos go through `images
 
 ### 4. Design system
 
+Read `references/creative-direction.md` first. Keep this phase to what the anchor screens need; the client sees the result on those screens, not as a board.
+
 Write `design-system.md` (nine sections), put every token in `src/tokens.json` (primitives, semantic colors per theme, type roles in points, radius, space, shadow), list every pair in `src/contrast-pairs.txt` with semantic names and run:
 
 ```bash
@@ -111,7 +115,7 @@ STILL=1 TEXT_SCALE=1.3 node render.js ../research/shots-home 390 ../tmp/01-home.
 node proto_test.js ../tmp/01-home.html ../research/shots-home/01
 ```
 
-Done when the anchor renders `OK` (targets included) in both themes and at 130% text, `proto_test.js` passes, and it has 0 problems and 0 contract warnings. Then set `"contract": "error"`.
+Done when the anchor renders `OK` (targets included) in both themes and at 130% text, `proto_test.js` passes, it passes the self-review in `references/creative-direction.md` section 3, it has 0 problems and 0 contract warnings, and the client has approved the anchor screens' live previews. Then set `"contract": "error"`.
 
 ### 7. Parallel tracks
 

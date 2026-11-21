@@ -5,24 +5,39 @@
   },
   "metadata": {
     "description": "Claude Code skills for designing on a Superdesign canvas without spending credits: one for phone apps (React Native / Expo handoff), one for websites and web apps (React / Next.js / Vite handoff).",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "superdesign-mobile",
       "source": "./plugins/superdesign-mobile",
       "description": "Design iOS and Android app screens (390 x 844, light and dark) on a Superdesign canvas and hand them off to React Native / Expo Router.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "design",
-      "keywords": ["superdesign", "mobile", "react-native", "expo", "ui", "design-system"]
+      "keywords": [
+        "superdesign",
+        "mobile",
+        "react-native",
+        "expo",
+        "ui",
+        "design-system"
+      ]
     },
     {
       "name": "superdesign-react",
       "source": "./plugins/superdesign-react",
       "description": "Design websites and web apps as React (TSX) pages on a Superdesign canvas and hand them off to a Next.js or Vite app.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "design",
-      "keywords": ["superdesign", "web", "react", "nextjs", "vite", "tailwind", "design-system"]
+      "keywords": [
+        "superdesign",
+        "web",
+        "react",
+        "nextjs",
+        "vite",
+        "tailwind",
+        "design-system"
+      ]
     }
   ]
 }
