@@ -8,9 +8,14 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -21,3 +26,32 @@ jobs:
           node-version: "20"
       - name: Validate marketplace, plugins, skills and scripts
         run: python3 .github/scripts/validate.py
+
+  smoke:
+    # Sets up a throwaway project from each SKILL.md, then builds, renders, measures and
+    # prototype-tests the template drafts in system Chrome (preinstalled on ubuntu-latest).
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        edition: [mobile, react]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Smoke test (${{ matrix.edition }})
+        run: .github/scripts/smoke.sh ${{ matrix.edition }} "$RUNNER_TEMP/smoke"
+      - name: Keep screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-${{ matrix.edition }}
+          path: ${{ runner.temp }}/smoke/.superdesign/research
+          if-no-files-found: ignore
+          retention-days: 7

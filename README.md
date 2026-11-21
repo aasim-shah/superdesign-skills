@@ -90,13 +90,15 @@ plugins/
     skills/de-superdesign-react-skill/
       SKILL.md
       references/  scripts/  templates/  examples/
-.github/                             CI: manifest, frontmatter and syntax checks
+.github/                             CI: validation, plus a smoke test of each skill in Chrome
 ```
 
 ## Contributing
 
 1. Change the skill under `plugins/<plugin>/skills/<skill>/`.
-2. Run the checks locally: `python3 .github/scripts/validate.py`.
+2. Run the checks locally:
+   - `python3 .github/scripts/validate.py` (manifests, frontmatter, syntax; a few seconds)
+   - `.github/scripts/smoke.sh mobile` and `.github/scripts/smoke.sh react` (set up a throwaway project from `SKILL.md`, then build, render, measure and prototype-test the templates in Chrome; a minute or two each)
 3. Bump `version` in that plugin's `plugin.json` and its entry in `.claude-plugin/marketplace.json`.
 4. Add a line to [CHANGELOG.md](CHANGELOG.md).
 
