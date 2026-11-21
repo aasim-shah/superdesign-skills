@@ -56,3 +56,7 @@
 .marquee { animation: sd-marquee 46s linear infinite; }
 .sd-still .marquee { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .marquee { animation: none; } * { scroll-behavior: auto !important; } }
+/* Cutouts (components/Cutouts.tsx): a device shadow, and a rim for a dark screen on a dark panel. */
+.phone-shadow { box-shadow: 0 60px 120px -40px theme('colors.ink.950 / 60%'), 0 0 0 1px theme('colors.white / 8%'); }
+.phone-rim { box-shadow: 0 60px 120px -40px theme('colors.ink.950 / 80%'), inset 0 0 0 1.5px theme('colors.white / 22%'); }
+.halo { background: radial-gradient(closest-side, theme('colors.brand.500 / 60%'), theme('colors.brand.500 / 18%') 50%, transparent 100%); border-radius: 9999px; }

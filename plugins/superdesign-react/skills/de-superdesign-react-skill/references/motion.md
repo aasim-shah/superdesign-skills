@@ -61,6 +61,21 @@ Pick two to four devices from design-system.md section 5 and give each a hook, a
 
 Rename them after the brand (a pet salon used bubbles that pop on click, a dog rising from a tub, a bath that fills with the scroll, a paw trail). The authored markup is the finished state: items in a fill checklist render as done, and the layer removes that state only while animating.
 
+For a product-led page (the composition in `references/creative-direction.md`), the signature layer carries the product: the phone or product rises out of its panel, leader lines draw (DrawSVG) before their callouts slide in, dots breathe, objects drift and follow a fine pointer, card objects drop onto their cards. The settings are in that reference, section 4.
+
+**Plugins and smooth scroll.** The build loads `gsap`, `ScrollTrigger`, `SplitText`, `Flip`, `DrawSVGPlugin` and `MotionPathPlugin` (all free since GSAP 3.13), pinned to config `"gsap"`. Register the ones you use (`gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin)`) and guard on `window.DrawSVGPlugin` before using them. Set config `"lenis"` to a pinned version to load Lenis; start it in the signature layer only when not static:
+
+```ts
+if (innerHeight <= 1600 && w.Lenis) {
+  const lenis = new w.Lenis({ lerp: 0.085, wheelMultiplier: 0.9, anchors: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((t: number) => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+```
+
+**Scrubbed copy leaves by moving.** A pinned hero whose copy fades to 0 leaves it hidden after the scroll (`proto_test.js` fails). Move it out (`y: -760` under the section's clip) instead.
+
 ## 6. Pause animation
 
 `MotionToggle` in the utility bar: it sets `html.sd-still`, stores the choice in localStorage (`sd-motion:<prefix>`), relabels itself "Play animation" and dispatches `sd-motion`; the layer pauses every registered loop and finishes running entrances; CSS loops stop through `.sd-still .marquee { animation-play-state: paused }`. The head guard reads the stored choice before first paint. The button renders "Pause animation" on the server and corrects itself in an effect, so hydration matches.

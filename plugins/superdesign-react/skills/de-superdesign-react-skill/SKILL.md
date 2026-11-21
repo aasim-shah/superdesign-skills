@@ -18,6 +18,7 @@ This is the React version of `de-superdesign-skill` (HTML partials, WordPress ha
 - `SKILL` below means the folder holding this file: the "Base directory for this skill" shown when the skill loads (for example `.claude/skills/de-superdesign-react-skill` for a copied skill, or a folder under `~/.claude/plugins/` for a plugin install). Never assume another path.
 - References, read when the phase comes:
   - `references/audit-and-plan.md`: intake, folder setup, crawl, audit tables, journeys, PLAN.md.
+  - `references/creative-direction.md`: what the client approves first, the composition recipe (product cutouts, panels, callouts), color, motion, self-review. Read before phases 4 and 6.
   - `references/brand-assets.md`: fetch, crop, reverse logo, WebP, upload with stable keys, `img()` and `brand()`.
   - `references/design-system.md`: the nine-section spec, `tokens.json` and `styles.css`, contrast, brand rules, the board.
   - `references/page-pipeline.md`: folder layout, the runtime, a page, components, `build.mjs`, both contracts, the anchor page.
@@ -42,6 +43,7 @@ This is the React version of `de-superdesign-skill` (HTML partials, WordPress ha
 9. **PLAN.md locally**; a Claude Doc only when the user asks for one.
 10. **Never merge pull requests**; humans merge.
 11. **Pass the authoring model** to imports (`--model <id>` or `DD_SD_MODEL`): it is recorded as `--generated-by`. Use the id of the model that actually wrote the TSX.
+12. **A page first, boards later.** The first thing the client approves is the anchor page (`01-home`) with real copy and real product imagery, sent as a live preview link; the `00` board follows from the approved page. Compose it with `references/creative-direction.md`: product cutouts breaking a panel edge, callouts with leader lines, paper + ink + one panel color + one accent.
 
 ## Phases
 
@@ -94,6 +96,8 @@ Read the screenshots. Write the four audit tables (critical issues, UX and IA, v
 
 ### 4. Design system
 
+Read `references/creative-direction.md` first. Keep this phase to what the anchor page needs (tokens, styles, contrast); the client sees the result on the anchor page, not as a board.
+
 Write `design-system.md` (nine sections), put every token in `src/tokens.json` (colors, fonts, type roles, radius, shadow, width), keep component classes in `src/styles.css`, list every pair in `src/contrast-pairs.txt` and run:
 
 ```bash
@@ -104,7 +108,7 @@ Done when contrast exits 0 (or each failure is a recorded decision) and the spec
 
 ### 5 and 6. Pipeline and the anchor page
 
-Fill the chrome components (`UtilityBar`, `Header`, `MegaMenu`, `Footer`, `FinderPalette`), `content/site.ts`, `content/palette.ts`, `titles.json` and `links.json`. The main session writes `pages/01-home.tsx` itself as the quality anchor: every brand device, every component at its best, both contracts clean.
+Fill the chrome components (`UtilityBar`, `Header`, `MegaMenu`, `Footer`, `FinderPalette`; drop the ones a small site does not need), `content/site.ts`, `content/palette.ts`, `titles.json` and `links.json`. The main session writes `pages/01-home.tsx` itself as the quality anchor, composed by the recipe in `references/creative-direction.md` (the product cut out of a panel edge with `components/Cutouts.tsx`, callouts on real UI, its motion in `motion/signature.ts`): every brand device, every component at its best, both contracts clean.
 
 ```bash
 cd .superdesign/tools && node build.mjs 01-home
@@ -113,7 +117,7 @@ STILL=1 node render.js ../research/shots-home 390 ../tmp/01-home.html
 python3 sheet.py page ../research/shots-home/01-home-1440.png ../research/shots-home/01 desktop
 ```
 
-Done when the anchor renders `OK` at 1440 and 390 (no hydration or script errors), reads well in every sheet, and has 0 problems and 0 contract warnings. Then set `"contract": "error"`.
+Done when the anchor renders `OK` at 1440 and 390 (no hydration or script errors), passes the self-review in `references/creative-direction.md` section 5, `proto_test.js` passes with motion live, it has 0 problems and 0 contract warnings, and the client has approved its live preview. Then set `"contract": "error"`.
 
 ### 7. Parallel tracks
 
@@ -192,6 +196,9 @@ Write `handoff/README.md` from `templates/handoff-README.md`: route map, block t
 | A hydration error in the console | No `Math.random()`, `Date`, `window` or locale-dependent formatting during render; browser code goes in effects |
 | A class works in one page and not in another | Tailwind only sees class names written in full in `src/`; never build them from strings (`bg-${c}`) |
 | An edge device clipped by its own section | `overflow-x-clip`, not `overflow-hidden` |
+| The client calls the work "dummy samples", "too many colours" or "boxy, AI-generated" | Show a real page with the real product cut out of a panel edge (`references/creative-direction.md`), one accent, no per-section gradients or bordered card grids |
+| `proto_test.js`: elements left hidden after scrolling, on pinned hero copy | Move scrubbed copy out with `y`; never fade it below 0.05 |
+| `duplicate ids` on a page that repeats an SVG object | Suffix gradient and mask ids with `useId()` |
 | Phone page wider than 390 | `grid-cols-1` before `md:grid-cols-12`; desktop overlays `hidden lg:block` |
 | Double gap in an icon button | Icon and text in one span |
 | Unstyled render, huge height | Bad load: `measure.js` rejects and retries; never import it |
@@ -215,7 +222,8 @@ The full table: `references/gotchas.md`.
 | `scripts/proto_test.js` | Menu, palette, clicks, nothing hidden, Pause animation, the canvas pass |
 | `scripts/block_inventory.py` | The route, block, component, hook, form and placeholder inventory |
 | `scripts/package.json`, `pw.js` | Dependencies and shared Playwright helpers |
-| `templates/src/` | The starting project: `tokens.json`, `styles.css`, `lib/` (runtime, `useFilter`), `components/`, `content/`, `motion/`, `pages/00-design-system.tsx`, `pages/01-home.tsx` |
+| `templates/src/` | The starting project: `tokens.json`, `styles.css`, `lib/` (runtime, `useFilter`), `components/` (including `Cutouts.tsx`: Phone, Callout, Leads), `content/`, `motion/`, `pages/00-design-system.tsx`, `pages/01-home.tsx` |
+| `references/creative-direction.md` | Composing the anchor page, choosing color, the motion recipe and the self-review before the client sees a page |
 | `templates/*.json`, `contrast-pairs.example.txt` | config, links, titles, brand manifest, contrast pairs |
 | `templates/PLAN.md`, `design-system.md`, `TRACKS.md`, `track-prompts.md`, `handoff-README.md` | The documents each phase writes |
 | `examples/design-system.md` | A finished nine-section spec for a fictional brand (AcmePets) |
