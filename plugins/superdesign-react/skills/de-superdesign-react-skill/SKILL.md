@@ -15,7 +15,7 @@ This is the React version of `de-superdesign-skill` (HTML partials, WordPress ha
 
 - New redesign: phase 0, then the phases in order. Read `references/gotchas.md` before the first page and again before the first import.
 - Joining one in progress: read `PLAN.md`, `.superdesign/design-system.md`, `src/TRACKS.md`, `src/drafts.json` and `tmp/_manifest.json`, then run `python3 import_drafts.py status`.
-- `SKILL` below means the folder holding this file (for example `.claude/skills/de-superdesign-react-skill`). Never assume another path.
+- `SKILL` below means the folder holding this file: the "Base directory for this skill" shown when the skill loads (for example `.claude/skills/de-superdesign-react-skill` for a copied skill, or a folder under `~/.claude/plugins/` for a plugin install). Never assume another path.
 - References, read when the phase comes:
   - `references/audit-and-plan.md`: intake, folder setup, crawl, audit tables, journeys, PLAN.md.
   - `references/brand-assets.md`: fetch, crop, reverse logo, WebP, upload with stable keys, `img()` and `brand()`.
@@ -67,7 +67,7 @@ This is the React version of `de-superdesign-skill` (HTML partials, WordPress ha
 Find what exists (memory, PLAN.md, `.superdesign/`, the project via `fetch-design-nodes`). Confirm own model only, the agent cap, the deadline and the target app (Next.js or Vite; `config.json` `app`). "By end of play" means design-complete with placeholders; the build waits on client content. Then:
 
 ```bash
-SKILL=.claude/skills/de-superdesign-react-skill          # the folder holding this SKILL.md
+SKILL="<base directory of this skill>"   # the folder holding this SKILL.md, e.g. .claude/skills/de-superdesign-react-skill
 mkdir -p .superdesign/{research,src,tmp,tools,handoff}
 cp "$SKILL"/scripts/* .superdesign/tools/
 cp -R "$SKILL"/templates/src/. .superdesign/src/

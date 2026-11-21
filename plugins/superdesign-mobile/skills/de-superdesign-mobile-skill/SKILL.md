@@ -15,7 +15,7 @@ This is the phone-app version of `de-superdesign-skill` (website drafts, WordPre
 
 - New app or redesign: phase 0, then the phases in order. Read `references/gotchas.md` before the first screen and again before the first import.
 - Joining one in progress: read `PLAN.md`, `.superdesign/design-system.md`, `src/TRACKS.md` and `src/drafts.json`, then run `python3 import_drafts.py status`.
-- `SKILL` below means the folder holding this file (for example `.claude/skills/de-superdesign-mobile-skill`). Never assume another path.
+- `SKILL` below means the folder holding this file: the "Base directory for this skill" shown when the skill loads (for example `.claude/skills/de-superdesign-mobile-skill` for a copied skill, or a folder under `~/.claude/plugins/` for a plugin install). Never assume another path.
 - References, read when the phase comes:
   - `references/audit-and-plan.md`: intake, the app audit (source, device screenshots, store listing), flows, the screen list with states, PLAN.md.
   - `references/brand-assets.md`: app icon, logo, illustration and photo keys, upload.
@@ -67,7 +67,7 @@ This is the phone-app version of `de-superdesign-skill` (website drafts, WordPre
 Find what exists (memory, PLAN.md, `.superdesign/`, the app's source, the Superdesign project). Confirm own model only, the agent cap, the deadline, the platforms (iOS, Android, both) and the app stack (Expo Router is the default handoff). Then:
 
 ```bash
-SKILL=.claude/skills/de-superdesign-mobile-skill          # the folder holding this SKILL.md
+SKILL="<base directory of this skill>"   # the folder holding this SKILL.md, e.g. .claude/skills/de-superdesign-mobile-skill
 mkdir -p .superdesign/{research,src/pages,src/partials,tmp,tools,handoff}
 cp "$SKILL"/scripts/* .superdesign/tools/
 cp "$SKILL"/templates/partials/* .superdesign/src/partials/

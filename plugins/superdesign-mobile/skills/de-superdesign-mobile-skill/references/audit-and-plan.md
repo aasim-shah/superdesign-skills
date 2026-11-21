@@ -27,7 +27,7 @@ When the user asks "how about the rest?", list the gap and start building. Ask o
 ## 2. Set up the project folder
 
 ```bash
-SKILL=.claude/skills/de-superdesign-mobile-skill          # the folder holding SKILL.md
+SKILL="<base directory of this skill>"   # the folder holding SKILL.md, e.g. .claude/skills/de-superdesign-mobile-skill
 mkdir -p .superdesign/{research,src/pages,src/partials,tmp,tools,handoff}
 cp "$SKILL"/scripts/* .superdesign/tools/
 cp "$SKILL"/templates/partials/* .superdesign/src/partials/
