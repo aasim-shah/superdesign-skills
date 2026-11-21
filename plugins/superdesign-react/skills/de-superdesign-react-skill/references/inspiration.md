@@ -1,6 +1,6 @@
 # Inspiration: reference designs, broken down
 
-Six compositions clients pointed to as "this is the level", described so the patterns can be reused without copying anyone's design. Read with `creative-direction.md`. Take the structure, never the brand, the copy or the imagery.
+Six compositions clients pointed to as "this is the level", described so the patterns can be reused without copying anyone's design, plus one page made with this skill that a client approved (`examples/walkaway-home/`, with source and screenshots). Read with `creative-direction.md`. Take the structure, never the brand, the copy or the imagery, and never the example's look for another product.
 
 ## Contents
 
@@ -19,7 +19,7 @@ Six compositions clients pointed to as "this is the level", described so the pat
 | The product is | Lead with | Section |
 |---|---|---|
 | A physical object | The object placed in a real scene, glass over the photograph | 2, 3 |
-| A phone app | Real screenshots in a device frame cut out of a panel, callouts on the UI | 3, 9 |
+| A phone app | Real screenshots in a device frame cut out of a panel, callouts on the UI | 3, 9, and `examples/walkaway-home/` |
 | A service people use in the world (rides, rentals, places) | A bento of photographs and a map tile with notched joins | 4 |
 | A platform or B2B service with nothing to photograph | One abstract hero object (a globe, a network) with label pills and glass notes | 6 |
 | A web app or dashboard | A two-tone shell, big numbers, one chart color | 7 |

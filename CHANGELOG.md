@@ -14,6 +14,9 @@ Lessons from a live redesign in which four versions were rejected before one was
 
 - `build.mjs` also loads `DrawSVGPlugin` and `MotionPathPlugin` with GSAP, and Lenis when config `"lenis"` names a version (`templates/config.example.json` sets `1.3.26`).
 - New `templates/src/components/Cutouts.tsx`: `Phone` (device frame around a real screenshot), `Callout` (glass note), `Leads` (leader lines with breathing dots) and `NotchCard` (a concave corner bite with the action seated in it), plus `.phone-shadow`, `.phone-rim` and `.halo` in the template `styles.css`.
+- New `templates/src/motion/product.ts`, started by `<Motion/>`: the product-led motion as a brand-neutral layer driven by hooks (`data-sig-stage`, `data-tilt`, `data-lead`, `data-callout`, `data-thing`, `data-sig-rise`, `data-sig-lean`, `data-sig="cards"`, `data-sig-drift`), with Lenis, the header state and the page fade.
+- New `examples/walkaway-home/`: the approved page with source, screenshots and its motion, marked as a reference for the level and method, not a look to reuse.
+- `references/creative-direction.md` section 0: references inform, they do not repeat; choose the composition per product and colors per brand.
 - `references/motion.md`: product-led signature motion, the plugins, starting Lenis, and moving scrubbed copy out instead of fading it.
 - Lessons table: the client's "dummy samples / too many colours / boxy" feedback, hidden pinned copy, duplicate SVG gradient ids.
 

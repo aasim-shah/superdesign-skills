@@ -11,6 +11,15 @@ Read this before the design system (phase 4) and again before the anchor page (p
 5. Self-review before showing a page
 6. Making the parts
 
+## 0. References inform, they do not repeat
+
+The references in `inspiration.md` and the approved example in `examples/walkaway-home/` show the level, not the look. For each new client:
+
+- Choose the composition from the product (`inspiration.md` section 1): an object, an app, a service in the world, a platform, a dashboard.
+- Take the panel color, the accent and the display face from the client's brand and the audit, never from an example.
+- Keep the method (product first, one broken edge, annotations on real parts, one accent, one quiet section) and the motion (`templates/src/motion/product.ts`).
+- If a draft could pass for one of the references with the logo swapped, change the composition before showing it.
+
 ## 1. What the client approves first
 
 The first approval is a real page, not a board. In order:
@@ -43,6 +52,8 @@ Between product sections, give one section to quiet type on paper (a statement, 
 - Every pair is declared and checked (`contrast.py`). If the brand's bright color fails as text, it stays graphics-only and a darker step carries text and buttons.
 
 ## 4. The motion recipe
+
+The template already implements this table in `motion/product.ts`: add the hooks (`data-sig-stage`, `data-tilt`, `data-sig-halo`, `data-thing`, `data-lead`, `data-dot`, `data-callout`, `data-sig-rise`, `data-sig-lean`, `data-sig="cards"`, `data-sig-drift`) and the motion follows. Brand-specific devices stay in `motion/signature.ts`.
 
 | Device | Motion | Settings |
 |---|---|---|

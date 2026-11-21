@@ -44,7 +44,7 @@ This is the React version of `de-superdesign-skill` (HTML partials, WordPress ha
 9. **PLAN.md locally**; a Claude Doc only when the user asks for one.
 10. **Never merge pull requests**; humans merge.
 11. **Pass the authoring model** to imports (`--model <id>` or `DD_SD_MODEL`): it is recorded as `--generated-by`. Use the id of the model that actually wrote the TSX.
-12. **A page first, boards later.** The first thing the client approves is the anchor page (`01-home`) with real copy and real product imagery, sent as a live preview link; the `00` board follows from the approved page. Compose it with `references/creative-direction.md`: product cutouts breaking a panel edge, callouts with leader lines, paper + ink + one panel color + one accent.
+12. **A page first, boards later.** The first thing the client approves is the anchor page (`01-home`) with real copy and real product imagery, sent as a live preview link; the `00` board follows from the approved page. Compose it with `references/creative-direction.md`: product cutouts breaking a panel edge, callouts with leader lines, paper + ink + one panel color + one accent. The references and `examples/walkaway-home/` set the level, not the look: each client gets a composition chosen for its product and colors from its brand.
 
 ## Phases
 
@@ -226,6 +226,8 @@ The full table: `references/gotchas.md`.
 | `templates/src/` | The starting project: `tokens.json`, `styles.css`, `lib/` (runtime, `useFilter`), `components/` (including `Cutouts.tsx`: Phone, Callout, Leads, NotchCard), `content/`, `motion/`, `pages/00-design-system.tsx`, `pages/01-home.tsx` |
 | `references/creative-direction.md` | Composing the anchor page, choosing color, the motion recipe and the self-review before the client sees a page |
 | `references/inspiration.md` | Matching a reference hero the client shows you, or deciding between a photographic scene and product cutouts |
+| `examples/walkaway-home/` | An approved product-led page with its source, screenshots and motion: read it for the level and the method, never copy its look |
+| `templates/src/motion/product.ts` | The brand-neutral product motion (rise, leader lines, callouts, drift, tilt, scrubbed rise and lean, card drops, smooth scroll, page fade), driven by hooks |
 | `templates/*.json`, `contrast-pairs.example.txt` | config, links, titles, brand manifest, contrast pairs |
 | `templates/PLAN.md`, `design-system.md`, `TRACKS.md`, `track-prompts.md`, `handoff-README.md` | The documents each phase writes |
 | `examples/design-system.md` | A finished nine-section spec for a fictional brand (AcmePets) |

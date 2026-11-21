@@ -61,7 +61,7 @@ Pick two to four devices from design-system.md section 5 and give each a hook, a
 
 Rename them after the brand (a pet salon used bubbles that pop on click, a dog rising from a tub, a bath that fills with the scroll, a paw trail). The authored markup is the finished state: items in a fill checklist render as done, and the layer removes that state only while animating.
 
-For a product-led page (the composition in `references/creative-direction.md`), the signature layer carries the product: the phone or product rises out of its panel, leader lines draw (DrawSVG) before their callouts slide in, dots breathe, objects drift and follow a fine pointer, card objects drop onto their cards. The settings are in that reference, section 4.
+For a product-led page (the composition in `references/creative-direction.md`), the template's third layer, `motion/product.ts`, carries the product: the product rises out of its panel, leader lines draw (DrawSVG) before their callouts slide in, dots breathe, objects drift and follow a fine pointer, card objects drop onto their cards, scrubbed phones rise and lean, draft links fade the page out. It is brand-neutral and driven by the hooks listed at its top; `<Motion/>` starts it after `signature.ts`. Keep brand-only devices in `signature.ts`. The settings are in `creative-direction.md` section 4.
 
 **Plugins and smooth scroll.** The build loads `gsap`, `ScrollTrigger`, `SplitText`, `Flip`, `DrawSVGPlugin` and `MotionPathPlugin` (all free since GSAP 3.13), pinned to config `"gsap"`. Register the ones you use (`gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin)`) and guard on `window.DrawSVGPlugin` before using them. Set config `"lenis"` to a pinned version to load Lenis; start it in the signature layer only when not static:
 
