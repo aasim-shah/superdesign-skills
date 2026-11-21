@@ -79,6 +79,7 @@ Look at the 1440 still and answer each question. Every "yes" is a fix before the
 - **Dots**: accent fill with a 2px white stroke, on a translucent accent ring. Pure white dots disappear on light screens.
 - **Dark product on a dark panel**: a radial halo behind it (accent at 60% fading out) and a 1.5px inner white rim at 22%.
 - **Shaded SVG objects**: gradient stops get their color from classes in `styles.css` (`.st-white { stop-color: theme('colors.white') }`), so components keep no hex. Give every gradient id a `useId()` suffix: the same object twice on a page otherwise fails the duplicate-id check.
+- **Notched corners**: `NotchCard` cuts a quarter-circle bite from a card's lower right corner (a CSS mask) and seats a round action in it, flush with the outer edges; the button's size is `2 * (notch - gap) / (1 + √2)`, so the gap stays even. Use it for plan cards and the corner of a bento of photographs. The joints where the bite meets the straight edges stay crisp; for rounded joints draw the card as an SVG path instead.
 - **Typographic cutout**: a large number or word cut out of a dark panel with an SVG `<mask>` (white rect, black `<text>`), with a gradient or photograph showing through.
 - **Pinned or scrubbed copy**: move it out (`y`) instead of fading it to 0. Content at opacity below 0.05 after scrolling fails `proto_test.js`.
 - **Tap targets**: text links and footer links get `inline-flex min-h-11 items-center` (and `min-w-11` for short words) to pass `TARGET=44`.

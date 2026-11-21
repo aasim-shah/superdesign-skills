@@ -19,7 +19,7 @@ This is the React version of `de-superdesign-skill` (HTML partials, WordPress ha
 - References, read when the phase comes:
   - `references/audit-and-plan.md`: intake, folder setup, crawl, audit tables, journeys, PLAN.md.
   - `references/creative-direction.md`: what the client approves first, the composition recipe (product cutouts, panels, callouts), color, motion, self-review. Read before phases 4 and 6.
-  - `references/inspiration.md`: two reference heroes (an atmospheric product scene, a product cutout with callouts) broken down layer by layer, and how to apply them without photography.
+  - `references/inspiration.md`: six reference designs broken down layer by layer (product scene, cutout with callouts, bento with notched joins, notched pricing cards, abstract hero object, two-tone app shell), which to pick for which product, and how to apply them without photography.
   - `references/brand-assets.md`: fetch, crop, reverse logo, WebP, upload with stable keys, `img()` and `brand()`.
   - `references/design-system.md`: the nine-section spec, `tokens.json` and `styles.css`, contrast, brand rules, the board.
   - `references/page-pipeline.md`: folder layout, the runtime, a page, components, `build.mjs`, both contracts, the anchor page.
@@ -223,7 +223,7 @@ The full table: `references/gotchas.md`.
 | `scripts/proto_test.js` | Menu, palette, clicks, nothing hidden, Pause animation, the canvas pass |
 | `scripts/block_inventory.py` | The route, block, component, hook, form and placeholder inventory |
 | `scripts/package.json`, `pw.js` | Dependencies and shared Playwright helpers |
-| `templates/src/` | The starting project: `tokens.json`, `styles.css`, `lib/` (runtime, `useFilter`), `components/` (including `Cutouts.tsx`: Phone, Callout, Leads), `content/`, `motion/`, `pages/00-design-system.tsx`, `pages/01-home.tsx` |
+| `templates/src/` | The starting project: `tokens.json`, `styles.css`, `lib/` (runtime, `useFilter`), `components/` (including `Cutouts.tsx`: Phone, Callout, Leads, NotchCard), `content/`, `motion/`, `pages/00-design-system.tsx`, `pages/01-home.tsx` |
 | `references/creative-direction.md` | Composing the anchor page, choosing color, the motion recipe and the self-review before the client sees a page |
 | `references/inspiration.md` | Matching a reference hero the client shows you, or deciding between a photographic scene and product cutouts |
 | `templates/*.json`, `contrast-pairs.example.txt` | config, links, titles, brand manifest, contrast pairs |
