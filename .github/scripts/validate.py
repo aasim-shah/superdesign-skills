@@ -22,6 +22,7 @@ import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+BINARY = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".pdf", ".woff", ".woff2", ".ttf", ".otf", ".zip"}
 problems = []
 
 
@@ -82,7 +83,11 @@ def check_marketplace():
 
 def check_skills():
     for sk in sorted(ROOT.glob("plugins/*/skills/*/SKILL.md")):
-        fm = frontmatter(sk.read_text(encoding="utf-8"))
+        try:
+            fm = frontmatter(sk.read_text(encoding="utf-8"))
+        except (UnicodeDecodeError, OSError) as e:
+            problems.append(f"{rel(sk)}: cannot read ({e.__class__.__name__})")
+            continue
         if fm is None:
             problems.append(f"{rel(sk)}: missing --- frontmatter ---")
             continue
@@ -122,9 +127,12 @@ def check_files():
                 problems.append(f"{rel(p)}: node --check failed\n{r.stderr.strip()}")
         if p.resolve() == me:
             continue
+        if p.suffix.lower() in BINARY:
+            continue
         try:
             text = p.read_text(encoding="utf-8")
-        except (UnicodeDecodeError, OSError):
+        except (UnicodeDecodeError, OSError) as e:
+            problems.append(f"{rel(p)}: cannot read as UTF-8 text, so it was not scanned ({e.__class__.__name__})")
             continue
         m = home.search(text)
         if m:
