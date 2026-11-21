@@ -137,7 +137,7 @@ export function startMotion() {
         (el) => !(h1 && (h1.contains(el) || el.contains(h1))) && !pinned(el) && !el.closest('[data-skip], [aria-hidden="true"]'),
       ),
     );
-    tl.from(items, { y: 22, opacity: 0, duration: 0.75, stagger: { amount: Math.min(0.5, items.length * 0.05) }, onComplete: () => settle(items) }, 0.3);
+    if (items.length) tl.from(items, { y: 22, opacity: 0, duration: 0.75, stagger: { amount: Math.min(0.5, items.length * 0.05) }, onComplete: () => settle(items) }, 0.3);
     $$('img', hero).forEach((img) => {
       const r = img.getBoundingClientRect();
       if (r.width < 200 || r.height < 140 || img.closest('[data-skip], [data-sig]')) return;
@@ -158,6 +158,7 @@ export function startMotion() {
         return r.height > 0 && r.height < vh * 0.9 && !pinned(el);
       }),
     );
+    if (!cand.length) return; // a page with nothing to reveal: an empty set makes GSAP warn, which fails proto_test
     gsap.set(cand, { opacity: 0, y: 32 });
     const shown = new Set<El>();
     const show = (batch: El[]) => {

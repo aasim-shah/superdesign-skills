@@ -19,6 +19,7 @@ This is the React version of `de-superdesign-skill` (HTML partials, WordPress ha
 - References, read when the phase comes:
   - `references/audit-and-plan.md`: intake, folder setup, crawl, audit tables, journeys, PLAN.md.
   - `references/creative-direction.md`: what the client approves first, the composition recipe (product cutouts, panels, callouts), color, motion, self-review. Read before phases 4 and 6.
+  - `references/inspiration.md`: nine reference designs broken down layer by layer (product scene, cutout with callouts, bento with notched joins, notched pricing cards, abstract hero object, two-tone app shell, split field with the object on the seam, shaped section edges, a drawing of the promise), which to pick for which product, and how to apply them without photography.
   - `references/brand-assets.md`: fetch, crop, reverse logo, WebP, upload with stable keys, `img()` and `brand()`.
   - `references/design-system.md`: the nine-section spec, `tokens.json` and `styles.css`, contrast, brand rules, the board.
   - `references/page-pipeline.md`: folder layout, the runtime, a page, components, `build.mjs`, both contracts, the anchor page.
@@ -43,7 +44,7 @@ This is the React version of `de-superdesign-skill` (HTML partials, WordPress ha
 9. **PLAN.md locally**; a Claude Doc only when the user asks for one.
 10. **Never merge pull requests**; humans merge.
 11. **Pass the authoring model** to imports (`--model <id>` or `DD_SD_MODEL`): it is recorded as `--generated-by`. Use the id of the model that actually wrote the TSX.
-12. **A page first, boards later.** The first thing the client approves is the anchor page (`01-home`) with real copy and real product imagery, sent as a live preview link; the `00` board follows from the approved page. Compose it with `references/creative-direction.md`: product cutouts breaking a panel edge, callouts with leader lines, paper + ink + one panel color + one accent.
+12. **A page first, boards later.** The first thing the client approves is the anchor page (`01-home`) with real copy and real product imagery, sent as a live preview link; the `00` board follows from the approved page. Compose it with `references/creative-direction.md`: product cutouts breaking a panel edge, callouts with leader lines, paper + ink + one panel color + one accent. The references and `examples/walkaway-home/` set the level, not the look: each client gets a composition chosen for its product and colors from its brand.
 
 ## Phases
 
@@ -222,8 +223,11 @@ The full table: `references/gotchas.md`.
 | `scripts/proto_test.js` | Menu, palette, clicks, nothing hidden, Pause animation, the canvas pass |
 | `scripts/block_inventory.py` | The route, block, component, hook, form and placeholder inventory |
 | `scripts/package.json`, `pw.js` | Dependencies and shared Playwright helpers |
-| `templates/src/` | The starting project: `tokens.json`, `styles.css`, `lib/` (runtime, `useFilter`), `components/` (including `Cutouts.tsx`: Phone, Callout, Leads), `content/`, `motion/`, `pages/00-design-system.tsx`, `pages/01-home.tsx` |
+| `templates/src/` | The starting project: `tokens.json`, `styles.css`, `lib/` (runtime, `useFilter`), `components/` (including `Cutouts.tsx`: Phone, Callout, Leads, NotchCard; `Sections.tsx`: Split, Edge; `Sketch.tsx`: Scribble, Hatch, Thread), `content/`, `motion/`, `pages/00-design-system.tsx`, `pages/01-home.tsx` |
 | `references/creative-direction.md` | Composing the anchor page, choosing color, the motion recipe and the self-review before the client sees a page |
+| `references/inspiration.md` | Matching a reference hero the client shows you, or deciding between a photographic scene and product cutouts |
+| `examples/walkaway-home/` | An approved product-led page with its source, screenshots and motion: read it for the level and the method, never copy its look |
+| `templates/src/motion/product.ts` | The brand-neutral product motion (rise, leader lines, callouts, drift, tilt, scrubbed rise and lean, card drops, smooth scroll, page fade), driven by hooks |
 | `templates/*.json`, `contrast-pairs.example.txt` | config, links, titles, brand manifest, contrast pairs |
 | `templates/PLAN.md`, `design-system.md`, `TRACKS.md`, `track-prompts.md`, `handoff-README.md` | The documents each phase writes |
 | `examples/design-system.md` | A finished nine-section spec for a fictional brand (AcmePets) |

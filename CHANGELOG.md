@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.2.0 (2026-11-21)
+
+The rest of the creative-direction work, which missed the 1.1.0 merge.
+
+### superdesign-react
+
+- New `references/inspiration.md`: nine reference designs broken down layer by layer (an atmospheric product scene, a product cutout with callouts, a bento of photographs with notched joins, notched pricing cards, an abstract hero object with label pills, a two-tone app shell, a split color field with the object on the seam, shaped section edges, a drawing of the promise), a table for picking one by product type, and how to apply them without photography.
+- New `examples/walkaway-home/`: an approved page with source, screenshots and its motion, marked as a reference for the level and method, not a look to reuse.
+- `references/creative-direction.md` section 0: references inform, they do not repeat; choose the composition per product and colors per brand.
+- New `templates/src/motion/product.ts`, started by `<Motion/>`: the product-led motion as a brand-neutral layer driven by hooks (`data-sig-stage`, `data-tilt`, `data-lead`, `data-callout`, `data-thing`, `data-sig-rise`, `data-sig-lean`, `data-sig="cards"`, `data-sig-drift`, `data-sig-seam`, `data-edge`, `data-sig-draw`), with Lenis, the header state and the page fade.
+- `templates/src/components/Cutouts.tsx` adds `NotchCard` (a concave corner bite with the action seated in it).
+- New `templates/src/components/Sections.tsx`: `Split` (two color fields with a straight or slanted seam, for an object standing across it) and `Edge` (tilt, zigzag, wave, curve and blob section edges in the neighbor's color).
+- New `templates/src/components/Sketch.tsx`: `Scribble` (seeded tangle), `Hatch` (a shape of parallel lines) and `Thread` (a loose line with loops), for a one-line drawing of a before, an after and the path between; `data-sig-draw` draws it like a pen.
+- Fix: `motion/motion.ts` no longer tweens an empty list (a page with nothing to reveal, or a hero with only a headline, made GSAP warn and failed `proto_test.js`).
+
 ## 1.1.0 (2026-11-21)
 
 Lessons from a live redesign in which four versions were rejected before one was approved: a token board shown first ("dummy samples"), a palette with eight color families ("too many colours, not mature"), a type-only page and a card-grid page ("boxy, AI-generated"). The approved version was product-led: real app screenshots cut out of rounded panels, callouts with leader lines, objects breaking card edges.

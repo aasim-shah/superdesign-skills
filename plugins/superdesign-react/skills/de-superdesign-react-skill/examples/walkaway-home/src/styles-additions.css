@@ -1,0 +1,27 @@
+/* WalkAway home: the additions on top of the template styles.css (devices, cutouts, fields). */
+/* Home devices. The dawn behind the hero cutout: warm light rising from below the numbers. */
+.dawn { background: linear-gradient(180deg, theme('colors.paper') 0%, theme('colors.paper') 34%, theme('colors.accent.500 / 22%') 62%, theme('colors.accent.500 / 70%') 86%, theme('colors.accent.600') 100%); }
+.sun { background: radial-gradient(circle at 50% 50%, theme('colors.white') 0%, theme('colors.paper') 22%, theme('colors.accent.500 / 85%') 58%, theme('colors.accent.500 / 0%') 72%); border-radius: 9999px; }
+.grain { background-image: radial-gradient(theme('colors.white / 6%') 1px, transparent 1px); background-size: 3px 3px; }
+.route { stroke-dasharray: 2 7; stroke-linecap: round; }
+.switch { inline-size: 52px; block-size: 30px; border-radius: 9999px; }
+.switch > span { inline-size: 24px; block-size: 24px; border-radius: 9999px; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+[aria-checked="true"] > .switch > span { transform: translateX(22px); }
+/* Minimal fields: a single underline, no box. */
+.field-line { border: 0; border-bottom: 1px solid theme('colors.ink.500'); border-radius: 0; background: transparent; }
+.field-line:focus { outline: none; border-bottom-color: theme('colors.ink.900'); box-shadow: 0 1px 0 0 theme('colors.ink.900'); }
+/* Cutout objects: gradient stops by class (no hex in components). */
+.st-white { stop-color: theme('colors.white'); }
+.st-paper { stop-color: theme('colors.paper'); }
+.st-stone1 { stop-color: theme('colors.stone.100'); }
+.st-stone2 { stop-color: theme('colors.stone.200'); }
+.st-stone3 { stop-color: theme('colors.stone.300'); }
+.st-night7 { stop-color: theme('colors.night.700'); }
+.st-night9 { stop-color: theme('colors.night.950'); }
+.st-acc5 { stop-color: theme('colors.accent.500'); }
+.st-acc6 { stop-color: theme('colors.accent.600'); }
+.phone-shadow { box-shadow: 0 60px 120px -40px theme('colors.night.950 / 70%'), 0 0 0 1px theme('colors.white / 8%'); }
+.on-night .field-line { border-bottom-color: theme('colors.white / 45%'); color: theme('colors.white'); }
+.on-night .field-line:focus { border-bottom-color: theme('colors.white'); box-shadow: 0 1px 0 0 theme('colors.white'); }
+.halo { background: radial-gradient(closest-side, theme('colors.accent.500 / 60%'), theme('colors.accent.500 / 18%') 50%, transparent 100%); border-radius: 9999px; }
+.phone-rim { box-shadow: 0 60px 120px -40px theme('colors.night.950 / 80%'), inset 0 0 0 1.5px theme('colors.white / 22%'); }

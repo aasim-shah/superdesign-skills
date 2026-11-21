@@ -2,6 +2,7 @@
  * Cutouts: the parts of a product-led composition (references/creative-direction.md).
  *   Phone    · a device frame around a real screenshot (an img('screen-…') key); [data-tilt] for pointer tilt
  *   Callout  · a glass note that names one real part of the product; [data-callout] slides in
+ *   NotchCard · a card with a concave corner bite and the action seated in it (see below)
  *   Leads    · hairline leader lines from dots on the product to the callouts, in the stage's own
  *              coordinates; [data-lead] draws (DrawSVG), [data-dot] breathes
  * Put all three in one fixed-size stage (for example 640 x 880, `absolute`, `hidden lg:block`) so the
@@ -12,6 +13,7 @@
  * Needs in styles.css: .phone-shadow and .phone-rim (box-shadows built from theme colors).
  */
 import type { LucideIcon } from 'lucide-react';
+import type React from 'react';
 
 /** Screenshot size in px (the source image); the frame keeps its aspect ratio. */
 export function Phone({ src, alt, width = 340, shot = [660, 1434], rim = false, className = '' }: { src: string; alt: string; width?: number; shot?: [number, number]; rim?: boolean; className?: string }) {
@@ -57,5 +59,27 @@ export function Leads({ width, height, leads }: { width: number; height: number;
         );
       })}
     </svg>
+  );
+}
+
+/**
+ * NotchCard: a card with a concave bite cut out of its lower right corner and the action seated in
+ * it (a plan card, a product tile, the corner of a bento). The bite is a quarter circle of radius
+ * `notch` around the corner (a CSS mask); the action is a circle flush with the card's outer edges,
+ * sized so an even `gap` runs between it and the bite. Pass the card surface in `surface` (for
+ * example 'bg-white' or 'bg-brand-50') and a round button or link as `action`; it fills its slot.
+ */
+export function NotchCard({ children, action, notch = 96, gap = 8, radius = 40, surface = 'bg-white', className = '' }: { children: React.ReactNode; action: React.ReactNode; notch?: number; gap?: number; radius?: number; surface?: string; className?: string }) {
+  const size = Math.round((2 * (notch - gap)) / (1 + Math.SQRT2));
+  const mask = `radial-gradient(circle at 100% 100%, transparent ${notch}px, black ${notch + 0.5}px)`;
+  return (
+    <div className={`relative ${className}`}>
+      <div className={`h-full ${surface}`} style={{ borderRadius: radius, WebkitMaskImage: mask, maskImage: mask }}>
+        {children}
+      </div>
+      <div className="absolute bottom-0 right-0 [&>*]:h-full [&>*]:w-full" style={{ width: size, height: size }}>
+        {action}
+      </div>
+    </div>
   );
 }
