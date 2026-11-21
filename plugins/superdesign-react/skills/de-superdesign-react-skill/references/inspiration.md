@@ -1,6 +1,6 @@
 # Inspiration: reference designs, broken down
 
-Six compositions clients pointed to as "this is the level", described so the patterns can be reused without copying anyone's design, plus one page made with this skill that a client approved (`examples/walkaway-home/`, with source and screenshots). Read with `creative-direction.md`. Take the structure, never the brand, the copy or the imagery, and never the example's look for another product.
+Eight compositions clients pointed to as "this is the level", described so the patterns can be reused without copying anyone's design, plus one page made with this skill that a client approved (`examples/walkaway-home/`, with source and screenshots). Read with `creative-direction.md`. Take the structure, never the brand, the copy or the imagery, and never the example's look for another product.
 
 ## Contents
 
@@ -11,8 +11,10 @@ Six compositions clients pointed to as "this is the level", described so the pat
 5. Notched pricing cards (the same bike-share app)
 6. Abstract hero object with label pills (a hiring platform)
 7. Two-tone app shell (a hiring dashboard)
-8. What they share
-9. Applying them without photography
+8. Split color field with the object on the seam (a guitar shop)
+9. Shaped section edges: waves, blobs, tilts, zigzags (a school)
+10. What they share
+11. Applying them without photography
 
 ## 1. Pick a pattern by product
 
@@ -24,6 +26,8 @@ Six compositions clients pointed to as "this is the level", described so the pat
 | A platform or B2B service with nothing to photograph | One abstract hero object (a globe, a network) with label pills and glass notes | 6 |
 | A web app or dashboard | A two-tone shell, big numbers, one chart color | 7 |
 | Plans or products to compare | Notched cards with the action button nested in the corner | 5 |
+| One iconic object (an instrument, a bottle, a shoe, a device) | Two color fields with the object standing across the seam | 8 |
+| A warm, friendly or playful brand (education, food, kids, community) | Bands joined by waves or blobs, a photo or video card riding on a band | 9 |
 
 ## 2. Atmospheric product scene
 
@@ -110,7 +114,36 @@ A hiring dashboard. Restraint is the design.
 
 Why it works: two surfaces and one brand color; type size, not color, sets the hierarchy; charts are small and readable.
 
-## 8. What they share
+## 8. Split color field with the object on the seam
+
+A guitar shop hero. Two flat colors and one object do everything.
+
+| Layer | What it does |
+|---|---|
+| The fields | The hero is split vertically: a pale cream field on the left (about 55%), a deep brown field on the right; both inside a frame of a third, mid-brown tone |
+| The object | A real guitar photo cutout stands exactly on the seam: its body sits half on each field, its headstock rises past the top of the frame. It joins the two colors, so the split reads as one composition |
+| Echo shapes | Two soft circles in tones of the two fields sit behind the guitar's body, one on each side, extending the object into the fields |
+| Copy | On the light field only: a hand-lettered, underlined display headline, one bold sentence, one dark pill button; nav links in the light field, the cart pill and social icons in the dark field |
+
+Why it works: maximum contrast with only two colors; the object is the bridge, so the eye lands on it first; each field has one job (the light one talks, the dark one frames).
+
+Build it with `Split` (`components/Sections.tsx`): `left`, `right`, `at` (the seam, in percent) and `slant` (px; 0 is straight). Put the object at `left: {at}%` with `-translate-x-1/2` and `data-sig-seam`, and let it break the top or bottom of the section. With a slant, the seam's top is at `at% + slant/2` and its bottom at `at% - slant/2`.
+
+## 9. Shaped section edges
+
+A school site. Sections do not end in straight lines.
+
+| Layer | What it does |
+|---|---|
+| The band | A saturated mustard band on a pale cream page; its top and bottom edges are organic waves, and a second wave lobe rises from below into it |
+| Content on the band | A heading and a paragraph on the left; a video card (photo with a round play button) on the right, its caption in white on the band |
+| Rhythm | The next section returns to cream with a centered heading and a short accent underline |
+
+Why it works: the shaped edges make the page feel made by hand and friendly; a single saturated band between calm sections gives a clear beat.
+
+Build edges with `Edge` (`components/Sections.tsx`): `shape` is `tilt`, `zigzag`, `wave`, `curve` or `blob`; `fill` is the neighbor's color as a fill class; `at="bottom"` rises from the bottom of a section into it, `at="top"` hangs from the top; `flip` mirrors it; `teeth` sets the zigzag count. The parent section needs `relative` and enough padding for the edge's height. Pick one edge family per site: waves and blobs for warm brands, tilts for confident or technical ones, zigzags for playful ones or a single accent moment. `data-edge` (set by the component) makes the shape swell into place on scroll.
+
+## 10. What they share
 
 - The product (or a symbol of it) is the largest, sharpest thing on screen, and real wherever possible.
 - One dominant atmosphere: a photograph, or one panel color. Accents are tints taken from it, or one brand color.
@@ -119,7 +152,7 @@ Why it works: two surfaces and one brand color; type size, not color, sets the h
 - Large, confident headlines (light or bold, never medium), one sentence, one primary action, one secondary.
 - Little chrome: a short nav, often a single pill or segmented control.
 
-## 9. Applying them without photography
+## 11. Applying them without photography
 
 - **App products**: real screenshots in a phone frame are the product (`components/Cutouts.tsx`), on one panel color with a halo, annotated with `Callout` and `Leads`.
 - **A scene or a bento**: ask the client for photography first. Stock is a fallback only with the user's yes: a free-license photo (for example Unsplash) is downloaded, uploaded with `upload.py` and shown to the user before use. Never hotlink, never generate images with Superdesign credits.
@@ -127,3 +160,4 @@ Why it works: two surfaces and one brand color; type size, not color, sets the h
 - **Objects**: shaded SVG cutouts (gradient stops by class, `useId()` ids), one slightly blurred.
 - **Notches**: `NotchCard` in `components/Cutouts.tsx` cuts the concave corner with a CSS mask and seats the round button in it.
 - **The glass**: `bg-white/10` to `/60` with `backdrop-blur`, a 1px white border at 15 to 70%, over the panel or photograph.
+- **A split field**: works with a shaded SVG object or a product screenshot in a frame as well as with a photo cutout; the object must cross the seam.

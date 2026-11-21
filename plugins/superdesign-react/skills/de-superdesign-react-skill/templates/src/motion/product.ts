@@ -15,6 +15,9 @@
  *   [data-sig-lean] · turns from -14° to -4° while its section passes (scrubbed)
  *   [data-sig="cards"] > [data-card] · cards rise; their [data-thing]s drop onto the top edge
  *   [data-sig-drift]· any element that should float gently forever (decorative, aria-hidden)
+ *   [data-sig-seam] · the object across a Split seam: rises into place on arrival, then sways a few
+ *                     degrees and climbs slightly with the scroll
+ *   [data-edge]     · a section Edge: its shape swells from 40% to full height as it scrolls in
  *   draft links     · links to another draft fade the page out before leaving
  *
  * Rules (as motion.ts): transforms, opacity and SVG strokes only; the markup is the finished state;
@@ -156,6 +159,26 @@ export function startProduct() {
     drift($$('[data-sig-drift]'));
   }
 
+  function seams() {
+    $$('[data-sig-seam]').forEach((el) => {
+      const sec = (el.closest('section') as El) || el;
+      const tl = gsap.timeline(STATIC ? {} : { scrollTrigger: { trigger: sec, start: 'top 75%', once: true } });
+      tl.from(el, { y: 120, rotation: -8, opacity: 0, duration: 1.6, ease: SOFT, clearProps: 'opacity' });
+      if (STATIC) {
+        tl.progress(1);
+        return;
+      }
+      gsap.to(el, { rotation: 4, y: -40, ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom top', scrub: 1.2 } });
+    });
+  }
+
+  function edges() {
+    if (STATIC) return;
+    $$('[data-edge] path').forEach((path) => {
+      gsap.fromTo(path, { scaleY: 0.4, transformOrigin: '50% 100%' }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: path.closest('svg'), start: 'top bottom', end: 'top 55%', scrub: 1 } });
+    });
+  }
+
   function transition() {
     if (STATIC) return;
     const root = ($('[data-sd-root]') as El) || document.body;
@@ -180,6 +203,8 @@ export function startProduct() {
         guard('leads', sectionLeads);
         guard('scrubbed', scrubbed);
         guard('cards', cards);
+        guard('seams', seams);
+        guard('edges', edges);
         guard('transition', transition);
         ST.refresh();
       }),

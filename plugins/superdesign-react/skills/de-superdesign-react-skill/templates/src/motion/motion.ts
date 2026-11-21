@@ -158,6 +158,7 @@ export function startMotion() {
         return r.height > 0 && r.height < vh * 0.9 && !pinned(el);
       }),
     );
+    if (!cand.length) return; // a page with nothing to reveal: an empty set makes GSAP warn, which fails proto_test
     gsap.set(cand, { opacity: 0, y: 32 });
     const shown = new Set<El>();
     const show = (batch: El[]) => {
