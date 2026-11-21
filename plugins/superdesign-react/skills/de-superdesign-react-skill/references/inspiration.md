@@ -1,6 +1,6 @@
 # Inspiration: reference designs, broken down
 
-Eight compositions clients pointed to as "this is the level", described so the patterns can be reused without copying anyone's design, plus one page made with this skill that a client approved (`examples/walkaway-home/`, with source and screenshots). Read with `creative-direction.md`. Take the structure, never the brand, the copy or the imagery, and never the example's look for another product.
+Nine compositions clients pointed to as "this is the level", described so the patterns can be reused without copying anyone's design, plus one page made with this skill that a client approved (`examples/walkaway-home/`, with source and screenshots). Read with `creative-direction.md`. Take the structure, never the brand, the copy or the imagery, and never the example's look for another product.
 
 ## Contents
 
@@ -13,8 +13,9 @@ Eight compositions clients pointed to as "this is the level", described so the p
 7. Two-tone app shell (a hiring dashboard)
 8. Split color field with the object on the seam (a guitar shop)
 9. Shaped section edges: waves, blobs, tilts, zigzags (a school)
-10. What they share
-11. Applying them without photography
+10. A drawing of the promise (a child psychologist)
+11. What they share
+12. Applying them without photography
 
 ## 1. Pick a pattern by product
 
@@ -28,6 +29,7 @@ Eight compositions clients pointed to as "this is the level", described so the p
 | Plans or products to compare | Notched cards with the action button nested in the corner | 5 |
 | One iconic object (an instrument, a bottle, a shoe, a device) | Two color fields with the object standing across the seam | 8 |
 | A warm, friendly or playful brand (education, food, kids, community) | Bands joined by waves or blobs, a photo or video card riding on a band | 9 |
+| A service that changes a state (therapy, coaching, consulting, cleaning, finance, any before and after) | One line drawing of the before, the after and the path between them | 10 |
 
 ## 2. Atmospheric product scene
 
@@ -143,7 +145,26 @@ Why it works: the shaped edges make the page feel made by hand and friendly; a s
 
 Build edges with `Edge` (`components/Sections.tsx`): `shape` is `tilt`, `zigzag`, `wave`, `curve` or `blob`; `fill` is the neighbor's color as a fill class; `at="bottom"` rises from the bottom of a section into it, `at="top"` hangs from the top; `flip` mirrors it; `teeth` sets the zigzag count. The parent section needs `relative` and enough padding for the edge's height. Pick one edge family per site: waves and blobs for warm brands, tilts for confident or technical ones, zigzags for playful ones or a single accent moment. `data-edge` (set by the component) makes the shape swell into place on scroll.
 
-## 10. What they share
+## 10. A drawing of the promise
+
+A child psychologist's hero. The picture is the motto: it says what the service does before the words do.
+
+| Layer | What it does |
+|---|---|
+| The field | One flat, warm color (a soft peach) edge to edge; nothing else behind |
+| The drawing | One white line, hand-drawn: on the left a tangled scribble (the child's worries), on the right a calm sphere filled with even parallel hatching (the child after help), joined by a loose thread with two small loops (the work in between) |
+| Headline | Large, centered under the drawing, in one family at two weights: "Your child" light, "Psychologist" heavy, in a deep plum |
+| Chrome | A thin outline "Sign up" button and four light text links; nothing competes with the drawing |
+
+Why it works: the visual carries the meaning, not decoration; before, path and after read in one glance; one line weight and one color keep it calm and adult even though it is playful.
+
+Build it in three steps:
+
+1. Write the promise as a before and an after in two words each (tangled → clear, late → on time, scattered → focused). If you cannot, the metaphor is not ready.
+2. Draw the before, the after and the path between them in one SVG with `components/Sketch.tsx`: `Scribble` (seeded, so server and client match), `Hatch` (a shape filled with parallel lines), `Thread` (a loose line with loops). One stroke width, `currentColor`.
+3. Put `data-sig-draw` on the SVG: `motion/product.ts` draws every path in order, like a pen, so the story plays in time; `data-sig-draw="scrub"` ties it to the scroll. On the canvas the finished drawing shows.
+
+## 11. What they share
 
 - The product (or a symbol of it) is the largest, sharpest thing on screen, and real wherever possible.
 - One dominant atmosphere: a photograph, or one panel color. Accents are tints taken from it, or one brand color.
@@ -152,7 +173,7 @@ Build edges with `Edge` (`components/Sections.tsx`): `shape` is `tilt`, `zigzag`
 - Large, confident headlines (light or bold, never medium), one sentence, one primary action, one secondary.
 - Little chrome: a short nav, often a single pill or segmented control.
 
-## 11. Applying them without photography
+## 12. Applying them without photography
 
 - **App products**: real screenshots in a phone frame are the product (`components/Cutouts.tsx`), on one panel color with a halo, annotated with `Callout` and `Leads`.
 - **A scene or a bento**: ask the client for photography first. Stock is a fallback only with the user's yes: a free-license photo (for example Unsplash) is downloaded, uploaded with `upload.py` and shown to the user before use. Never hotlink, never generate images with Superdesign credits.

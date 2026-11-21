@@ -7,7 +7,7 @@ Lessons from a live redesign in which four versions were rejected before one was
 ### Both skills
 
 - New `references/creative-direction.md`: the client approves a real page or real screens first, the board follows; a composition or screen recipe; one panel color and one accent; a self-review table to run before showing anything.
-- New `references/inspiration.md` (React edition): eight reference designs (six at first, two added below) broken down layer by layer (an atmospheric product scene, a product cutout with callouts, a bento of photographs with notched joins, notched pricing cards, an abstract hero object with label pills, a two-tone app shell), a table for picking one by product type, and how to apply them without photography.
+- New `references/inspiration.md` (React edition): nine reference designs (six at first, three added below) broken down layer by layer (an atmospheric product scene, a product cutout with callouts, a bento of photographs with notched joins, notched pricing cards, an abstract hero object with label pills, a two-tone app shell), a table for picking one by product type, and how to apply them without photography.
 - New default 12 in each SKILL.md: a page (or screens) first, boards later. Phases 4 and 6 point to the new reference, and the anchor's "done when" includes the self-review and the client's approval of the live preview.
 
 ### superdesign-react
@@ -16,6 +16,9 @@ Lessons from a live redesign in which four versions were rejected before one was
 - New `templates/src/components/Cutouts.tsx`: `Phone` (device frame around a real screenshot), `Callout` (glass note), `Leads` (leader lines with breathing dots) and `NotchCard` (a concave corner bite with the action seated in it), plus `.phone-shadow`, `.phone-rim` and `.halo` in the template `styles.css`.
 - New `templates/src/motion/product.ts`, started by `<Motion/>`: the product-led motion as a brand-neutral layer driven by hooks (`data-sig-stage`, `data-tilt`, `data-lead`, `data-callout`, `data-thing`, `data-sig-rise`, `data-sig-lean`, `data-sig="cards"`, `data-sig-drift`), with Lenis, the header state and the page fade.
 - New `templates/src/components/Sections.tsx`: `Split` (two color fields with a straight or slanted seam, for an object standing across it) and `Edge` (tilt, zigzag, wave, curve and blob section edges in the neighbor's color); `motion/product.ts` animates them (`data-sig-seam` rises and sways, `data-edge` swells in).
+- New `templates/src/components/Sketch.tsx`: `Scribble` (seeded tangle), `Hatch` (a shape of parallel lines) and `Thread` (a loose line with loops), for a one-line drawing of a before, an after and the path between; `data-sig-draw` in `motion/product.ts` draws it like a pen (once, or scrubbed).
+- `inspiration.md` adds a drawing of the promise (a tangle joined to a calm hatched sphere) and when to use one.
+- Fix: `motion/motion.ts` hero intro no longer tweens an empty item list (a hero with only a headline warned three times and failed `proto_test.js`).
 - `inspiration.md` adds two more references: a split color field with the object on the seam, and shaped section edges.
 - Fix: `motion/motion.ts` no longer calls `gsap.set` on an empty reveal list, whose GSAP warning failed `proto_test.js` on pages with nothing to reveal.
 - New `examples/walkaway-home/`: the approved page with source, screenshots and its motion, marked as a reference for the level and method, not a look to reuse.

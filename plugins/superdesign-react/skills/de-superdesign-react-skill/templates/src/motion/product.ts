@@ -18,6 +18,8 @@
  *   [data-sig-seam] · the object across a Split seam: rises into place on arrival, then sways a few
  *                     degrees and climbs slightly with the scroll
  *   [data-edge]     · a section Edge: its shape swells from 40% to full height as it scrolls in
+ *   [data-sig-draw] · an SVG drawing (components/Sketch.tsx): every path draws in document order when
+ *                     it comes into view, like a pen; [data-sig-draw="scrub"] ties the pen to the scroll
  *   draft links     · links to another draft fade the page out before leaving
  *
  * Rules (as motion.ts): transforms, opacity and SVG strokes only; the markup is the finished state;
@@ -179,6 +181,25 @@ export function startProduct() {
     });
   }
 
+  /** a pen draws every path of the drawing in order: the story the metaphor tells, told in time */
+  function drawings() {
+    if (STATIC || !DRAW) return;
+    $$('[data-sig-draw]').forEach((svg) => {
+      const paths = $$('path', svg);
+      if (!paths.length) return;
+      const scrub = svg.getAttribute('data-sig-draw') === 'scrub';
+      const tl = gsap.timeline({ scrollTrigger: scrub ? { trigger: svg, start: 'top 80%', end: 'bottom 40%', scrub: 1 } : { trigger: svg, start: 'top 78%', once: true } });
+      // long strokes take longer, so the pen keeps one speed; short strokes in a run (hatching)
+      // overlap, so a shape of many lines fills in about a second instead of one line at a time
+      paths.forEach((p) => {
+        const len = (p as unknown as SVGPathElement).getTotalLength ? (p as unknown as SVGPathElement).getTotalLength() : 200;
+        const d = scrub ? len / 600 : Math.min(2.2, 0.12 + len / 1600);
+        const at = len < 320 ? `>-${(d * 0.8).toFixed(2)}` : scrub ? '>' : '>-0.05';
+        tl.from(p, { drawSVG: '0%', duration: d, ease: scrub ? 'none' : 'power1.inOut' }, at);
+      });
+    });
+  }
+
   function transition() {
     if (STATIC) return;
     const root = ($('[data-sd-root]') as El) || document.body;
@@ -205,6 +226,7 @@ export function startProduct() {
         guard('cards', cards);
         guard('seams', seams);
         guard('edges', edges);
+        guard('drawings', drawings);
         guard('transition', transition);
         ST.refresh();
       }),

@@ -53,7 +53,7 @@ Between product sections, give one section to quiet type on paper (a statement, 
 
 ## 4. The motion recipe
 
-The template already implements this table in `motion/product.ts`: add the hooks (`data-sig-stage`, `data-tilt`, `data-sig-halo`, `data-thing`, `data-lead`, `data-dot`, `data-callout`, `data-sig-rise`, `data-sig-lean`, `data-sig="cards"`, `data-sig-drift`, `data-sig-seam`; `data-edge` comes with `Edge`) and the motion follows. Brand-specific devices stay in `motion/signature.ts`.
+The template already implements this table in `motion/product.ts`: add the hooks (`data-sig-stage`, `data-tilt`, `data-sig-halo`, `data-thing`, `data-lead`, `data-dot`, `data-callout`, `data-sig-rise`, `data-sig-lean`, `data-sig="cards"`, `data-sig-drift`, `data-sig-seam`, `data-sig-draw`; `data-edge` comes with `Edge`) and the motion follows. Brand-specific devices stay in `motion/signature.ts`.
 
 | Device | Motion | Settings |
 |---|---|---|
@@ -91,6 +91,7 @@ Look at the 1440 still and answer each question. Every "yes" is a fix before the
 - **Dark product on a dark panel**: a radial halo behind it (accent at 60% fading out) and a 1.5px inner white rim at 22%.
 - **Shaded SVG objects**: gradient stops get their color from classes in `styles.css` (`.st-white { stop-color: theme('colors.white') }`), so components keep no hex. Give every gradient id a `useId()` suffix: the same object twice on a page otherwise fails the duplicate-id check.
 - **Notched corners**: `NotchCard` cuts a quarter-circle bite from a card's lower right corner (a CSS mask) and seats a round action in it, flush with the outer edges; the button's size is `2 * (notch - gap) / (1 + √2)`, so the gap stays even. Use it for plan cards and the corner of a bento of photographs. The joints where the bite meets the straight edges stay crisp; for rounded joints draw the card as an SVG path instead.
+- **A drawing of the promise**: `components/Sketch.tsx` (`Scribble`, `Hatch`, `Thread`) draws a before, an after and the path between them in one line; `data-sig-draw` animates it like a pen. See `inspiration.md` section 10.
 - **Split fields and shaped edges**: `components/Sections.tsx` has `Split` (two color fields, straight or slanted seam, an object across it) and `Edge` (tilt, zigzag, wave, curve or blob between two sections, drawn in the neighbor's color). See `inspiration.md` sections 8 and 9 for when each fits.
 - **Typographic cutout**: a large number or word cut out of a dark panel with an SVG `<mask>` (white rect, black `<text>`), with a gradient or photograph showing through.
 - **Pinned or scrubbed copy**: move it out (`y`) instead of fading it to 0. Content at opacity below 0.05 after scrolling fails `proto_test.js`.
