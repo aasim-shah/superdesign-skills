@@ -43,7 +43,7 @@ Each skill folder is self-contained. Other agents that read `SKILL.md` files can
 - Google Chrome installed. Playwright drives system Chrome (`channel: 'chrome'`), so no browser download is needed.
 - A Superdesign account and project, with the Superdesign CLI signed in. The tools look for `$SUPERDESIGN_CLI` first, then a `superdesign` binary on `PATH`, then `npx --yes @superdesign/cli@latest`.
 
-The skill installs everything else itself into `.superdesign/tools/` (Playwright 1.48.2; the React edition also adds esbuild, React 19 and Tailwind 3).
+The skill installs everything else itself into `.superdesign/tools/` (Playwright 1.64.1; the React edition also adds esbuild, React 19 and Tailwind 3).
 
 ## Use
 

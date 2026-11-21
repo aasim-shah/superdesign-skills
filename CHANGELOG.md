@@ -39,6 +39,7 @@ First public release. Both skills are rewrites of an internal HTML-to-WordPress 
 - The viewport check covers `h-dvh`, `min-h-dvh`, `h-svh` and `h-lvh`.
 - `contrast.py --tokens` checks semantic pairs per theme.
 - Skill descriptions list triggers only.
+- Playwright is pinned to 1.64.1. 1.48.2 had a high-severity advisory (browser downloads without SSL certificate checks, fixed in 1.55.1). Both editions pass their smoke tests on 1.64.1 with unchanged heights.
 
 ### Known limits
 

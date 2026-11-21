@@ -37,7 +37,7 @@ cp "$SKILL"/templates/links.example.json .superdesign/src/links.json
 cp "$SKILL"/templates/titles.example.json .superdesign/src/titles.json
 cp "$SKILL"/templates/CONTENT.md .superdesign/src/CONTENT.md
 cp "$SKILL"/templates/pages/* .superdesign/src/pages/          # the board, a tab root and a pushed screen to start from
-cd .superdesign/tools && npm install          # Playwright 1.48.2, system Chrome
+cd .superdesign/tools && npm install          # Playwright 1.64.1, system Chrome
 ```
 
 Set `project_id`, `prefix`, `device` (points: width, height, status bar, home indicator, tab bar, nav bar), `platform` and `routes`. Device presets:

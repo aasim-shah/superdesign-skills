@@ -4,5 +4,5 @@
   "description": "Render, measure and test mobile app screen drafts (de-superdesign-mobile-skill). Uses system Chrome (channel: 'chrome').",
   "type": "commonjs",
   "engines": { "node": ">=20" },
-  "dependencies": { "playwright": "1.48.2" }
+  "dependencies": { "playwright": "1.64.1" }
 }

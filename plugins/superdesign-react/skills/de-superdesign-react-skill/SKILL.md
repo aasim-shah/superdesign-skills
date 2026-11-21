@@ -74,7 +74,7 @@ cp -R "$SKILL"/templates/src/. .superdesign/src/
 cp "$SKILL"/templates/config.example.json .superdesign/src/config.json
 cp "$SKILL"/templates/links.example.json .superdesign/src/links.json
 cp "$SKILL"/templates/titles.example.json .superdesign/src/titles.json
-cd .superdesign/tools && npm install     # esbuild, React 19, Tailwind 3, Playwright 1.48.2 (system Chrome)
+cd .superdesign/tools && npm install     # esbuild, React 19, Tailwind 3, Playwright 1.64.1 (system Chrome)
 ```
 
 Set `project_id` and `prefix` in `config.json`. Keep `research/`, `tmp/` and `tools/node_modules/` out of git.

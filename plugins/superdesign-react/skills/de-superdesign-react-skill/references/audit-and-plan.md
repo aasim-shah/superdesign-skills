@@ -37,7 +37,7 @@ cp "$SKILL"/templates/titles.example.json .superdesign/src/titles.json
 cd .superdesign/tools && npm install
 ```
 
-`npm install` pins esbuild, React 19, Tailwind 3, lucide-react and Playwright 1.48.2 (it drives the system Chrome; set `DD_SD_CHANNEL=` to use Playwright's own Chromium). Set `project_id` and `prefix` in `config.json`. Keep `research/`, `tmp/` and `tools/node_modules/` out of git. The Superdesign CLI is found by `sdcli.py`: `$SUPERDESIGN_CLI`, a `superdesign` binary, else `npx --yes @superdesign/cli@latest`.
+`npm install` pins esbuild, React 19, Tailwind 3, lucide-react and Playwright 1.64.1 (it drives the system Chrome; set `DD_SD_CHANNEL=` to use Playwright's own Chromium). Set `project_id` and `prefix` in `config.json`. Keep `research/`, `tmp/` and `tools/node_modules/` out of git. The Superdesign CLI is found by `sdcli.py`: `$SUPERDESIGN_CLI`, a `superdesign` binary, else `npx --yes @superdesign/cli@latest`.
 
 ## 3. Crawl
 
