@@ -19,8 +19,9 @@
  *      the canvas, and the thumbnail shows the finished server render;
  *   3. compiles Tailwind once for all pages from tokens.json + styles.css + the sources, and inlines
  *      it (no CDN at runtime; the stylesheet sets --sd-css: 1, which measure.js checks);
- *   4. loads GSAP from jsDelivr, pinned (config "gsap"), with the head guard (config "motion": false
- *      turns the motion layer off);
+ *   4. loads GSAP from jsDelivr, pinned (config "gsap": gsap, ScrollTrigger, SplitText, Flip,
+ *      DrawSVGPlugin, MotionPathPlugin), and Lenis when config "lenis" names a version, with the head
+ *      guard (config "motion": false turns the motion layer off);
  *   5. writes tmp/<page>.html and tmp/_manifest.json (title, route, components used, dead ends),
  *      then runs check.py (draft contract problems, handoff contract warnings).
  * An unknown image or brand key stops that page. Exit 1 on any problem (or dead end with
@@ -205,7 +206,7 @@ const headGuard = MOTION
   ? `<script>\n/* Motion pre-paint guard: hide the page until the GSAP intro has set its first frame (sdMotionOff), at most 2.2s.\n   Full-height canvas frames (innerHeight > 1600), reduced-motion visitors and anyone who paused animation are never hidden. */\n(function(){var d=document.documentElement,K=${JSON.stringify('sd-motion:' + prefix)};window.sdMotionOff=function(){d.classList.remove('sd-pre')};var paused=false;try{paused=localStorage.getItem(K)==='off'}catch(e){}if(paused)d.classList.add('sd-still');try{if(innerHeight<=1600&&!paused&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('sd-pre');setTimeout(window.sdMotionOff,2200)}}catch(e){}})();\n</script>\n<style>.sd-pre #${rootId}{visibility:hidden}</style>\n`
   : '';
 const gsapTags = MOTION
-  ? ['gsap', 'ScrollTrigger', 'SplitText', 'Flip'].map((f) => `<script src="https://cdn.jsdelivr.net/npm/gsap@${gsapV}/dist/${f}.min.js"${f === 'Flip' ? '' : ' onerror="window.sdMotionOff&&sdMotionOff()"'}></script>`).join('\n') + '\n'
+  ? ['gsap', 'ScrollTrigger', 'SplitText', 'Flip', 'DrawSVGPlugin', 'MotionPathPlugin'].map((f) => `<script src="https://cdn.jsdelivr.net/npm/gsap@${gsapV}/dist/${f}.min.js"${['Flip', 'DrawSVGPlugin', 'MotionPathPlugin'].includes(f) ? '' : ' onerror="window.sdMotionOff&&sdMotionOff()"'}></script>`).join('\n') + '\n' + (cfg.lenis ? `<script src="https://cdn.jsdelivr.net/npm/lenis@${cfg.lenis}/dist/lenis.min.js"></script>\n` : '')
   : '';
 const fontLinks = T.fonts && T.fonts.href ? `<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="${esc(T.fonts.href)}" rel="stylesheet">\n` : '';
 

@@ -1,5 +1,5 @@
 {
- "_note": "Copy to .superdesign/src/config.json. prefix: the root id ({prefix}-root) and the Pause animation storage key. brand_urls: Superdesign brand-asset URLs written by upload.py, used as brand('logo'). forbidden: strings that must never ship (old brand names, misspellings, the agency's name). contract: warn | error | off for the React handoff checks. eyebrows: false warns on .eyebrow (house rule). reference_pages: boards skipped by the handoff checks and the block inventory. frame_width / mobile_width / mobile_pattern / frame_widths: canvas frame widths (import_drafts.py). check_fonts: families measure.js and render.js require. motion: false drops the GSAP layer. gsap: the pinned GSAP version for drafts. app: the handoff target (next or vite).",
+ "_note": "Copy to .superdesign/src/config.json. prefix: the root id ({prefix}-root) and the Pause animation storage key. brand_urls: Superdesign brand-asset URLs written by upload.py, used as brand('logo'). forbidden: strings that must never ship (old brand names, misspellings, the agency's name). contract: warn | error | off for the React handoff checks. eyebrows: false warns on .eyebrow (house rule). reference_pages: boards skipped by the handoff checks and the block inventory. frame_width / mobile_width / mobile_pattern / frame_widths: canvas frame widths (import_drafts.py). check_fonts: families measure.js and render.js require. motion: false drops the GSAP layer. gsap: the pinned GSAP version for drafts. app: the handoff target (next or vite). gsap: the pinned GSAP version (ScrollTrigger, SplitText, Flip, DrawSVGPlugin and MotionPathPlugin load with it). lenis: a pinned Lenis version for smooth scroll (omit or null to scroll natively).",
  "project_id": "<superdesign-project-id>",
  "prefix": "xyz",
  "asset_prefix": "brandname",
@@ -8,16 +8,28 @@
   "logo": "https://.../brand-assets/brandname-logo/logo.png",
   "logo-rev": "https://.../brand-assets/brandname-logo-rev/logo-rev.png"
  },
- "forbidden": ["Old Brand Name", "Brandname misspelling", "DEK", "lorem", "Lorem"],
+ "forbidden": [
+  "Old Brand Name",
+  "Brandname misspelling",
+  "DEK",
+  "lorem",
+  "Lorem"
+ ],
  "contract": "warn",
  "eyebrows": false,
- "reference_pages": ["00-design-system"],
+ "reference_pages": [
+  "00-design-system"
+ ],
  "frame_width": 1440,
  "mobile_width": 390,
  "mobile_pattern": "mobile",
  "frame_widths": {},
- "check_fonts": ["Inter", "Inter Tight"],
+ "check_fonts": [
+  "Inter",
+  "Inter Tight"
+ ],
  "motion": true,
  "gsap": "3.15.0",
- "app": "next"
+ "app": "next",
+ "lenis": "1.3.26"
 }
