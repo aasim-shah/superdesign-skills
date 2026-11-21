@@ -7,6 +7,7 @@ Lessons from a live redesign in which four versions were rejected before one was
 ### Both skills
 
 - New `references/creative-direction.md`: the client approves a real page or real screens first, the board follows; a composition or screen recipe; one panel color and one accent; a self-review table to run before showing anything.
+- New `references/inspiration.md` (React edition): two reference heroes broken down layer by layer (an atmospheric product scene, a product cutout with callouts), and how to apply them without photography.
 - New default 12 in each SKILL.md: a page (or screens) first, boards later. Phases 4 and 6 point to the new reference, and the anchor's "done when" includes the self-review and the client's approval of the live preview.
 
 ### superdesign-react

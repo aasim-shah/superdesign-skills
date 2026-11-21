@@ -1,6 +1,6 @@
 # Creative direction: the anchor page
 
-Read this before the design system (phase 4) and again before the anchor page (phase 6). It says what the first thing the client sees is, how it is composed, and how it moves. Template parts: `templates/src/components/Cutouts.tsx` (Phone, Callout, Leads).
+Read this before the design system (phase 4) and again before the anchor page (phase 6). It says what the first thing the client sees is, how it is composed, and how it moves. Template parts: `templates/src/components/Cutouts.tsx` (Phone, Callout, Leads). Worked references, broken down layer by layer: `references/inspiration.md`.
 
 ## Contents
 
