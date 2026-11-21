@@ -1,0 +1,11 @@
+{
+  "name": "superdesign-react",
+  "description": "Design websites and web apps as React (TSX) pages on a Superdesign canvas without spending credits, and hand them off to a Next.js or Vite app.",
+  "version": "1.0.0",
+  "author": {
+    "name": "aasim-shah"
+  },
+  "repository": "https://github.com/aasim-shah/superdesign-skills",
+  "license": "MIT",
+  "keywords": ["superdesign", "web", "react", "nextjs", "vite", "tailwind", "design-system"]
+}

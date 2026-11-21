@@ -1,0 +1,11 @@
+{
+  "name": "superdesign-mobile",
+  "description": "Design iOS and Android app screens (390 x 844, light and dark) on a Superdesign canvas without spending credits, and hand them off to React Native / Expo Router.",
+  "version": "1.0.0",
+  "author": {
+    "name": "aasim-shah"
+  },
+  "repository": "https://github.com/aasim-shah/superdesign-skills",
+  "license": "MIT",
+  "keywords": ["superdesign", "mobile", "react-native", "expo", "ui", "design-system"]
+}
