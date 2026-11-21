@@ -1,0 +1,15 @@
+# Every text and background pair the design uses, with its use: text 4.5, large 3.0, ui 3.0, decorative.
+# Check: python3 contrast.py --tokens ../src/tokens.json --pairs ../src/contrast-pairs.txt --json-out ../src/contrast-pairs.json
+# The JSON output has the contrast-pairs.json shape (fg, bg, use, where, ratio) and carries into the app build.
+ink-800 on white text           # body text
+ink-500 on white text           # muted text and captions
+ink-500 on white ui             # input borders
+ink-950 on paper text           # headings on the alternate band
+white on ink-950 text           # dark bands: every text, link and icon is white
+white on ink-900 text           # dark bands
+white on brand-600 text         # the one CTA color: white text must reach 4.5
+white on brand-700 text         # CTA hover
+brand-700 on white text         # links and small accent text
+ink-950 on accent-400 text      # stickers and badges
+ink-900 on white ui             # focus ring on light
+white on ink-950 ui             # focus ring on dark

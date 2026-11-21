@@ -1,0 +1,71 @@
+<!-- NAVKIT · the prototype's interactions, included once from head.html. Vanilla JS, no dependencies.
+     Overlays are fixed and display none while closed, so a screen's height never changes.
+     Hooks: [data-tabbar][data-active] marks the active tab · [role="switch"] toggles aria-checked ·
+     [data-segment] > button: one aria-pressed · [data-chips] > button: many aria-pressed ·
+     [data-sheet-open="<id>"] opens the sheet #<id> ([data-sheet], data-open), [data-sheet-close] or Esc closes it,
+     focus moves in and is trapped, then returns · [data-toast="message"] shows a status toast ·
+     links to other drafts record push, back (#nav-back) or tab for motion.html.
+     Handoff: each hook is a React Native control or component state: Switch value, SegmentedControl
+     selectedIndex, chip selection state, a formSheet route or bottom sheet, a toast library. -->
+<script>
+(function () {
+  function ready(fn) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
+  ready(function () {
+    var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
+    $$('[data-tabbar]').forEach(function (bar) {
+      var act = bar.getAttribute('data-active');
+      $$('[data-tab]', bar).forEach(function (t) { if (act && t.getAttribute('data-tab') === act) t.setAttribute('aria-current', 'page'); });
+    });
+    $$('[role="switch"]').forEach(function (s) {
+      s.addEventListener('click', function () { s.setAttribute('aria-checked', String(s.getAttribute('aria-checked') !== 'true')); });
+    });
+    $$('[data-segment]').forEach(function (g) {
+      var bs = $$('button', g);
+      bs.forEach(function (b) { b.addEventListener('click', function () { bs.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); });
+    });
+    $$('[data-chips] button').forEach(function (b) {
+      b.addEventListener('click', function () { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); });
+    });
+
+    var open = null, last = null;
+    function focusables(el) { return $$('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])', el).filter(function (x) { return !x.disabled && x.offsetParent !== null; }); }
+    function openSheet(id) {
+      var w = document.getElementById(id); if (!w) return;
+      last = document.activeElement; w.setAttribute('data-open', 'true'); open = w;
+      var f = focusables(w.querySelector('.sheet') || w); if (f[0]) f[0].focus();
+    }
+    function closeSheet() { if (!open) return; open.setAttribute('data-open', 'false'); open = null; if (last && last.focus) last.focus(); }
+    $$('[data-sheet-open]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); openSheet(b.getAttribute('data-sheet-open')); }); });
+    $$('[data-sheet-close]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); closeSheet(); }); });
+    var pre = document.querySelector('[data-sheet][data-open="true"]'); if (pre) open = pre;
+    document.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') { e.preventDefault(); closeSheet(); return; }
+      if (e.key === 'Tab') {
+        var f = focusables(open), i = f.indexOf(document.activeElement);
+        if (!f.length) return;
+        if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+      }
+    });
+
+    var toast = null, timer = null;
+    $$('[data-toast]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (!toast) {
+          toast = document.createElement('div'); toast.className = 'toast'; toast.setAttribute('role', 'status');
+          (document.querySelector('.screen') || document.body).appendChild(toast);
+        }
+        toast.textContent = b.getAttribute('data-toast'); toast.setAttribute('data-show', 'true');
+        clearTimeout(timer); timer = setTimeout(function () { toast.setAttribute('data-show', 'false'); }, 2400);
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="https://p.superdesign.dev/draft/"]');
+      if (!a) return;
+      try { sessionStorage.setItem('sd-nav', a.closest('[data-tabbar]') ? 'tab' : a.id === 'nav-back' ? 'back' : 'push'); } catch (err) {}
+    }, true);
+  });
+})();
+</script>

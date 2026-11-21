@@ -1,0 +1,15 @@
+<!-- NAVBAR · status bar + inline navigation row for pushed screens: back button, centred title (the screen's h1)
+     and one optional trailing action.
+     Parameters: title, title-tag (default h1; "span" when the screen's first block holds the H1), back (#hash of the
+     previous screen, default #back), back-label (default Back),
+     action (label), action-href (#hash), action-class ("" shows the action; default hidden).
+     Example (in a page, inside double braces): > navbar title="Edit item" back="#home" back-label="Home" action="Save" action-href="#home" action-class=""
+     Handoff: Stack.Screen options (title, headerBackTitle, headerRight); expo-router handles the back gesture. -->
+<div class="topbar">
+{{> statusbar}}
+  <div class="navrow">
+    <a id="nav-back" href="{{@back|#back}}" class="nav-btn"><iconify-icon icon="ph:caret-left-bold" width="22" aria-hidden="true"></iconify-icon><span class="t-body">{{@back-label|Back}}</span></a>
+    <{{@title-tag|h1}} class="navrow-title t-headline">{{@title}}</{{@title-tag|h1}}>
+    <a id="nav-action" href="{{@action-href|#}}" class="nav-btn t-headline {{@action-class|hidden}}">{{@action}}</a>
+  </div>
+</div>

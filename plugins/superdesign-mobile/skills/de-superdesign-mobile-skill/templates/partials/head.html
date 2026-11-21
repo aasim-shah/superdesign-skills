@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" class="{{theme}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<!-- HEAD · tokens come only from src/tokens.json ({{tokens}}: Tailwind config, light and dark custom properties,
+     .t-<role> type classes in rem, device metrics). Component classes below use token utilities only; their names
+     are the vocabulary tracks and the React Native handoff rely on (cell, group, btn-*, switch, segment, sheet, tabbar). -->
+{{fonts}}
+<script src="https://cdn.tailwindcss.com"></script>
+{{tokens}}
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style type="text/tailwindcss">
+  @layer base {
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-tap-highlight-color: transparent; }
+    body { @apply bg-bg text-fg; font-optical-sizing: auto; }
+    :focus-visible { outline: 3px solid rgb(var(--c-accent)); outline-offset: 2px; border-radius: 10px; }
+    [hidden] { display: none !important; }
+    h1, h2, h3 { text-wrap: balance; }
+  }
+  @layer components {
+    /* chrome */
+    .topbar { @apply sticky top-0 z-30 bg-bg/90 backdrop-blur-xl; }
+    .statusbar { height: var(--status-h); @apply flex items-center justify-between px-7 pt-1 text-fg; }
+    .statusbar-time { @apply text-[17px] font-semibold tracking-[-0.02em]; }
+    .navrow { height: var(--navbar-h); @apply relative flex items-center justify-between px-2; }
+    .navrow-title { @apply pointer-events-none absolute inset-x-16 truncate text-center; }
+    .nav-btn { @apply inline-flex h-11 min-w-[44px] items-center gap-0.5 rounded-full px-2 text-accent; }
+    .tabbar { padding-bottom: var(--home-h); @apply sticky bottom-0 z-30 mt-auto border-t border-line bg-surface/90 backdrop-blur-xl; }
+    .tabbar-row { height: var(--tabbar-h); @apply grid grid-flow-col auto-cols-fr; }
+    .tab { @apply flex min-h-[44px] flex-col items-center justify-center gap-0.5 pt-1 text-[10px] font-semibold leading-[12px] text-fg-muted; }
+    .tab[aria-current="page"] { @apply text-accent; }
+    .homebar { height: var(--home-h); @apply sticky bottom-0 z-30 mt-auto flex items-end justify-center pb-2; }
+    .homebar::after { content: ""; @apply block h-[5px] w-[134px] rounded-full bg-fg; }
+    /* content */
+    .pad { @apply px-4; }
+    .group { @apply overflow-hidden rounded-lg bg-surface shadow-card; }
+    .group > * + * { @apply relative; }
+    .group > * + *::before { content: ""; @apply absolute left-4 right-0 top-0 h-px bg-line; }
+    .group-label { @apply px-4 pb-1.5 pt-6 t-footnote uppercase tracking-[0.04em] text-fg-muted; }
+    .cell { @apply flex min-h-[48px] w-full items-center gap-3 px-4 py-2.5 text-left; }
+    .cell-icon { @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-accent text-on-accent; }
+    .card { @apply rounded-xl bg-surface p-4 shadow-card; }
+    .btn { @apply inline-flex h-[50px] items-center justify-center gap-2 whitespace-nowrap rounded-pill px-6 t-headline transition-transform duration-150 active:scale-[.97]; }
+    .btn-primary { @apply btn bg-accent text-on-accent; }
+    .btn-secondary { @apply btn bg-surface-2 text-fg; }
+    .btn-plain { @apply inline-flex min-h-[44px] items-center gap-1 t-body text-accent; }
+    .btn-danger { @apply btn bg-surface-2 text-danger; }
+    .chip { @apply inline-flex h-9 items-center gap-1.5 rounded-pill bg-surface-2 px-3.5 t-subhead text-fg; }
+    .chip[aria-pressed="true"] { @apply bg-accent text-on-accent; }
+    .field { @apply h-12 w-full rounded-md border border-line bg-surface px-4 t-body text-fg placeholder:text-fg-muted focus:border-accent focus:outline-none; }
+    .label { @apply mb-1.5 block t-subhead font-semibold text-fg; }
+    /* controls: state lives in ARIA attributes, the handoff maps them to RN props */
+    /* the switch is a 51 x 44 hit area; the 51 x 31 track and the thumb are drawn inside it */
+    .switch { @apply relative inline-flex h-11 w-[51px] shrink-0; }
+    .switch::before { content: ""; @apply absolute inset-x-0 top-[6.5px] h-[31px] rounded-pill bg-surface-2 transition-colors duration-200; }
+    .switch::after { content: ""; @apply absolute left-[2px] top-[8.5px] h-[27px] w-[27px] rounded-full bg-white shadow-raised transition-transform duration-200; }
+    .switch[aria-checked="true"]::before { @apply bg-success; }
+    .switch[aria-checked="true"]::after { transform: translateX(20px); }
+    .segment { @apply grid grid-flow-col auto-cols-fr gap-0.5 rounded-md bg-surface-2 p-0.5; }
+    .segment > button { @apply h-11 rounded-[7px] t-footnote font-semibold text-fg; }
+    .segment > button[aria-pressed="true"] { @apply bg-surface shadow-card; }
+    /* overlays: closed sheets are display none, so they never change a screen's height */
+    .sheet-wrap { @apply fixed inset-0 z-50 hidden; }
+    .sheet-wrap[data-open="true"] { @apply block; }
+    .scrim { @apply absolute inset-0 bg-scrim; }
+    .sheet { padding-bottom: calc(var(--home-h) + 8px); @apply absolute inset-x-0 bottom-0 rounded-t-sheet bg-surface px-4 pt-2 shadow-sheet; }
+    .grabber { @apply mx-auto mb-3 block h-[5px] w-9 rounded-full bg-line; }
+    .toast { bottom: calc(var(--home-h) + var(--tabbar-h) + 12px); @apply pointer-events-none fixed inset-x-4 z-[60] rounded-lg bg-fg px-4 py-3 text-center t-subhead font-semibold text-bg opacity-0 transition-opacity duration-200; }
+    .toast[data-show="true"] { @apply opacity-100; }
+  }
+  @keyframes sd-sheet-in { from { transform: translateY(100%); } to { transform: none; } }
+  .sheet-wrap[data-open="true"] .sheet { animation: sd-sheet-in .32s cubic-bezier(.2,.8,.2,1); }
+  .sheet-wrap[data-open="true"] .scrim { animation: sd-fade .24s ease-out; }
+  @keyframes sd-fade { from { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .sheet-wrap[data-open="true"] .sheet, .sheet-wrap[data-open="true"] .scrim { animation: none; } .btn { transition: none; } }
+</style>
+{{> navkit}}
+</head>
+<body>

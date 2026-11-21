@@ -1,0 +1,15 @@
+# Every text and background pair the screens use, with its use: text 4.5, large 3.0, ui 3.0, decorative.
+# Semantic names are checked in every theme (light and dark); primitives once.
+# Check: python3 contrast.py --tokens ../src/tokens.json --pairs ../src/contrast-pairs.txt --json-out ../src/contrast-pairs.json
+fg on bg text                  # body text on the screen background
+fg on surface text             # text in cards, cells and sheets
+fg-muted on bg text            # secondary text, captions
+fg-muted on surface text       # secondary text in cells
+fg-muted on surface-2 text     # muted text on chips and segmented controls
+accent on bg text              # plain buttons, links
+accent on surface text         # links in cells
+on-accent on accent text       # the primary button label
+danger on surface text         # destructive actions, errors
+success on surface text        # confirmations
+fg-muted on surface ui         # idle tab icons, input borders
+line on surface decorative     # dividers (recorded only)

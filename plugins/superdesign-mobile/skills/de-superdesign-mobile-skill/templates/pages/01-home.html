@@ -1,0 +1,101 @@
+<!-- title: Home | App name -->
+{{> head}}
+<div id="{{prefix}}-root" class="screen" data-screen="scroll">
+<!-- Handoff contract, screen level (references/handoff-contract.md):
+     the root is the device (class "screen", data-screen "fixed" = exactly one device tall, "scroll" = the full
+     scroll length); every child of <main> is one <section> = one future React Native component: data-block="<kebab-name>"
+     (named for the content, reused across screens for the same kind), aria-labelledby on its heading id (or aria-label);
+     repeated items are real repeated markup with data-repeater="<field>" on the list (a FlatList or map in the app);
+     controls keep their state in ARIA attributes (aria-checked, aria-pressed) and behavior in data-* hooks; text sits in
+     text elements (p, span, headings, labels, buttons), never bare in a div; tokens only; invented copy has data-placeholder.
+     Screen ids start with pNN-. One H1: the screen title. -->
+{{> topbar}}
+<main id="main" class="flex-1 pb-8">
+
+<!-- HEADER: the large title owns the screen's H1 -->
+<section data-block="screen-header" aria-labelledby="p01-title" class="pad flex items-end justify-between pt-1">
+  <div>
+    <p class="t-subhead text-fg-muted" data-placeholder>Thursday, 19 November</p>
+    <h1 id="p01-title" class="t-large-title">Home</h1>
+  </div>
+  <button type="button" class="mb-1 inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface-2 text-accent" data-sheet-open="p01-new" aria-label="New item"><iconify-icon icon="ph:plus-bold" width="22" aria-hidden="true"></iconify-icon></button>
+</section>
+
+<!-- SUMMARY: the one thing the user came for -->
+<section data-block="summary-card" aria-labelledby="p01-next" class="pad mt-5">
+  <a id="p01-next-card" href="#item" class="card block transition-transform active:scale-[.98]">
+    <span class="flex items-center justify-between">
+      <span id="p01-next" class="t-subhead font-semibold text-fg-muted">Up next</span>
+      <span class="chip h-7 bg-accent/10 text-accent">In 2 h</span>
+    </span>
+    <span class="mt-2 block t-stat" data-placeholder>06:30</span>
+    <span class="mt-1 block t-callout text-fg-muted" data-placeholder>Weekdays · Morning routine</span>
+  </a>
+</section>
+
+<!-- FILTER: segmented control (state in aria-pressed) -->
+<section data-block="list-filter" aria-label="Show" class="pad mt-6">
+  <div class="segment" data-segment role="group" aria-label="Show">
+    <button type="button" aria-pressed="true">All</button>
+    <button type="button" aria-pressed="false">Active</button>
+    <button type="button" aria-pressed="false">Paused</button>
+  </div>
+</section>
+
+<!-- ITEMS: an inset grouped list; each row links to the detail screen and has a switch -->
+<section data-block="item-list" aria-labelledby="p01-items" class="pad">
+  <h2 id="p01-items" class="group-label">Items</h2>
+  <ul class="group" role="list" data-repeater="items">
+    <li class="cell">
+      <a id="p01-item-1" href="#item" class="flex min-h-[44px] min-w-0 flex-1 items-center gap-3 self-stretch">
+        <span class="cell-icon"><iconify-icon icon="ph:sun-horizon-fill" width="18" aria-hidden="true"></iconify-icon></span>
+        <span class="min-w-0"><span class="block truncate t-body" data-placeholder>Morning routine</span><span class="block t-footnote text-fg-muted" data-placeholder>06:30 · Weekdays</span></span>
+      </a>
+      <button type="button" class="switch" role="switch" aria-checked="true" aria-label="Morning routine on"></button>
+    </li>
+    <li class="cell">
+      <a id="p01-item-2" href="#item" class="flex min-h-[44px] min-w-0 flex-1 items-center gap-3 self-stretch">
+        <span class="cell-icon"><iconify-icon icon="ph:barbell-fill" width="18" aria-hidden="true"></iconify-icon></span>
+        <span class="min-w-0"><span class="block truncate t-body" data-placeholder>Gym</span><span class="block t-footnote text-fg-muted" data-placeholder>07:15 · Mon, Wed, Fri</span></span>
+      </a>
+      <button type="button" class="switch" role="switch" aria-checked="false" aria-label="Gym on"></button>
+    </li>
+    <li class="cell">
+      <a id="p01-item-3" href="#item" class="flex min-h-[44px] min-w-0 flex-1 items-center gap-3 self-stretch">
+        <span class="cell-icon"><iconify-icon icon="ph:moon-stars-fill" width="18" aria-hidden="true"></iconify-icon></span>
+        <span class="min-w-0"><span class="block truncate t-body" data-placeholder>Weekend</span><span class="block t-footnote text-fg-muted" data-placeholder>08:00 · Sat, Sun</span></span>
+      </a>
+      <button type="button" class="switch" role="switch" aria-checked="true" aria-label="Weekend on"></button>
+    </li>
+  </ul>
+</section>
+
+<!-- ACTIONS: primary action in the accent color, secondary as a tinted button -->
+<section data-block="actions" aria-label="Actions" class="pad mt-6 grid grid-cols-1 gap-3">
+  <button type="button" class="btn-primary w-full" data-sheet-open="p01-new"><iconify-icon icon="ph:plus-bold" width="20" aria-hidden="true"></iconify-icon><span>New item</span></button>
+  <button type="button" class="btn-secondary w-full" data-toast="Synced just now">Sync now</button>
+</section>
+
+</main>
+{{> tabbar active="home"}}
+
+<!-- SHEET: closed by default (display none, so the height never changes); 06-home-sheet draws it open as its own screen -->
+<div id="p01-new" class="sheet-wrap" data-sheet data-open="false" role="dialog" aria-modal="true" aria-labelledby="p01-new-title">
+  <div class="scrim" data-sheet-close></div>
+  <div class="sheet">
+    <span class="grabber" aria-hidden="true"></span>
+    <div class="flex items-center justify-between">
+      <h2 id="p01-new-title" class="t-title3">New item</h2>
+      <button type="button" class="btn-plain" data-sheet-close>Cancel</button>
+    </div>
+    <label for="p01-name" class="label mt-4">Name</label>
+    <input id="p01-name" class="field" placeholder="Morning routine">
+    <p class="label mt-5">Repeat</p>
+    <div class="flex flex-wrap gap-2" data-chips role="group" aria-label="Repeat on">
+      <button type="button" class="chip min-h-[44px]" aria-pressed="true">Mon</button><button type="button" class="chip min-h-[44px]" aria-pressed="true">Tue</button><button type="button" class="chip min-h-[44px]" aria-pressed="true">Wed</button><button type="button" class="chip min-h-[44px]" aria-pressed="false">Sat</button><button type="button" class="chip min-h-[44px]" aria-pressed="false">Sun</button>
+    </div>
+    <button type="button" class="btn-primary mt-6 w-full" data-sheet-close data-toast="Item saved">Save</button>
+  </div>
+</div>
+</div>
+</body></html>

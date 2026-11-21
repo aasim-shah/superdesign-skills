@@ -1,0 +1,58 @@
+/* styles.css: base rules and component classes, compiled by Tailwind with the tokens.json theme.
+   build.mjs prepends @tailwind base/components/utilities and the generated type roles; the app
+   build uses this file as is. Component classes only use token utilities (no hex here except the
+   focus ring fallbacks): a one-off color is a missing token. */
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { font-optical-sizing: auto; @apply bg-white; }
+  :focus-visible { outline: 3px solid theme('colors.ink.900'); outline-offset: 2px; border-radius: 6px; }
+  .on-dark :focus-visible, .on-dark:focus-visible { outline-color: theme('colors.white'); }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  [hidden] { display: none !important; }
+  mark { @apply rounded bg-brand-100 px-0.5 text-ink-900; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-site px-5 md:px-8; }
+  /* Eyebrows are OFF by default (house rule). Keep this class only if the client asks for them. */
+  .eyebrow { @apply inline-flex items-center gap-2 font-display text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-brand-700 md:text-[13px]; }
+  /* Buttons: one "do this" color (brand-600, white text >= 4.5:1). Icon and text sit in ONE span. */
+  .btn { @apply inline-flex h-14 items-center justify-center gap-2.5 whitespace-nowrap rounded-full px-7 font-display text-[16px] font-semibold leading-none transition-colors duration-200; }
+  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700; }
+  .btn-outline { @apply btn border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-white; }
+  .btn-light { @apply btn bg-white text-ink-900 shadow-md hover:bg-paper; }
+  .btn-ghost-dark { @apply btn border-2 border-white/80 text-white hover:bg-white/10; }
+  .btn-sm { @apply h-11 px-5 text-[15px]; }
+  .chip { @apply inline-flex h-8 items-center gap-1.5 rounded-full px-3.5 font-display text-[13px] font-semibold leading-none; }
+  .card { @apply rounded-card border border-line bg-white shadow-sm transition-shadow duration-300 hover:shadow-md; }
+  .link { @apply font-semibold text-brand-700 underline decoration-2 underline-offset-[5px] hover:decoration-[3px]; }
+  .field { @apply h-14 w-full rounded-xl border-[1.5px] border-ink-500 bg-white px-4 text-[17px] text-ink-800 placeholder:text-ink-500 focus:border-ink-900 focus:outline-none focus:ring-[3px] focus:ring-ink-900/25; }
+  .label { @apply mb-2 block font-display text-[15px] font-semibold text-ink-900; }
+  .hint { @apply mt-1.5 block text-[14px] text-ink-500; }
+  .nav-btn { @apply inline-flex h-11 items-center whitespace-nowrap rounded-full px-[13px] font-display text-[15.5px] font-semibold text-ink-900 transition-colors hover:bg-brand-50 hover:text-brand-700 aria-expanded:bg-brand-50 aria-expanded:text-brand-700 aria-[current=page]:bg-brand-50 aria-[current=page]:text-brand-700; }
+  .mm-row { @apply grid grid-cols-[48px_1fr] items-center gap-3.5 rounded-[18px] p-3 transition-colors hover:bg-brand-50 focus-visible:bg-brand-50; }
+  .mm-ic { @apply flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-700; }
+  .mm-title { @apply block font-display text-[17px] font-semibold text-ink-900; }
+  .mm-desc { @apply mt-0.5 block text-[15px] leading-[1.45] text-ink-500; }
+  .kbd { @apply inline-flex h-[22px] min-w-[22px] items-center justify-center rounded-md border border-current px-[5px] font-sans text-[12px] font-semibold leading-none opacity-75; }
+  /* Dark bands: `on-dark text-white` on the section. Every text, link, eyebrow and icon is pure white
+     there (icons inherit currentColor). White cards inside a dark band set their own text color. */
+  .on-dark .display-xl, .on-dark .h1, .on-dark .h2, .on-dark .h3, .on-dark .h4, .on-dark .stat, .on-dark .eyebrow, .on-dark .link { color: theme('colors.white'); }
+  .on-dark .card .h3, .on-dark .card .h4, .on-dark .card .link { color: inherit; }
+}
+
+/* Signature shapes and devices, un-layered: never set position, display or spacing here (an
+   un-layered rule beats Tailwind utilities). Section edges drawn with ::before/::after need
+   overflow-x-clip on the section, not overflow-hidden (that clips the edge). */
+.skip { position: absolute; left: 16px; top: -64px; z-index: 100; }
+.skip:focus { top: 12px; }
+.rail { scroll-snap-type: x mandatory; scrollbar-width: none; }
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: start; }
+.tabular { font-variant-numeric: tabular-nums; }
+@keyframes sd-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee { animation: sd-marquee 46s linear infinite; }
+.sd-still .marquee { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .marquee { animation: none; } * { scroll-behavior: auto !important; } }

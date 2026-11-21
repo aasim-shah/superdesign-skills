@@ -1,0 +1,12 @@
+<!-- TABBAR · the app's tab bar, sticky at the bottom: pinned while a phone-size viewport scrolls, at the end of a
+     full-height canvas frame. Edit the tabs for the project (3 to 5). Parameter: active (the data-tab of the current
+     tab; sub-screens pass their parent tab). links.py marks a tab that links to the current screen, navkit marks
+     the active one, both with aria-current="page".
+     Handoff: app/(tabs)/_layout.tsx (Tabs, tabBarActiveTintColor = accent); icons map to SF Symbols / Material. -->
+<nav class="tabbar" aria-label="Tabs" data-tabbar data-active="{{@active}}">
+  <div class="tabbar-row">
+    <a id="tab-home" href="#home" class="tab" data-tab="home"><iconify-icon icon="ph:house-fill" width="26" aria-hidden="true"></iconify-icon><span>Home</span></a>
+    <a id="tab-library" href="#library" class="tab" data-tab="library"><iconify-icon icon="ph:books-fill" width="26" aria-hidden="true"></iconify-icon><span>Library</span></a>
+    <a id="tab-settings" href="#settings" class="tab" data-tab="settings"><iconify-icon icon="ph:gear-six-fill" width="26" aria-hidden="true"></iconify-icon><span>Settings</span></a>
+  </div>
+</nav>

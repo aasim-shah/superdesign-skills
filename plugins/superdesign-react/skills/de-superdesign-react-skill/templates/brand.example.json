@@ -1,0 +1,6 @@
+{
+ "_note": "Copy to .superdesign/research/brand/brand.json and run upload.py --brand. Keys become brand('key') in pages (config brand_urls). file is relative to this file. type: logo, image or font.",
+ "logo": { "file": "logo.png", "type": "logo", "description": "Wordmark in brand colors, for light backgrounds" },
+ "logo-rev": { "file": "logo-rev.png", "type": "logo", "description": "Wordmark reversed (white type), for dark bands" },
+ "mark": { "file": "mark.png", "type": "image", "description": "Square brand mark, for avatars, seals and favicons" }
+}

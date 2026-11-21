@@ -1,0 +1,29 @@
+{
+ "_note": "Copy to .superdesign/src/config.json. prefix: the root id ({{prefix}}-root). device: the phone frame in points (status bar, home indicator, tab bar, nav bar heights); every screen is device.width wide and at least device.height tall. platform: ios or android (drives the chrome partials you pick and the target size: 44 or 48). frame_width / frame_widths: canvas widths (the board is 1440). dark_pages: pages also built as <page>--dark (or \"all\"). brand_urls: Superdesign brand-asset URLs (upload.py), used as {{app-icon}}. forbidden: strings that must never ship. inject: partials appended before </body> on every screen. contract: warn | error | off for the React Native handoff checks. reference_pages: boards skipped by the handoff checks and the inventory. check_fonts: families measure.js and render.js require. routes: page -> expo-router file, read by block_inventory.py.",
+ "project_id": "<superdesign-project-id>",
+ "prefix": "xyz",
+ "asset_prefix": "appname",
+ "lang": "en",
+ "default_title": "App name",
+ "platform": "ios",
+ "device": { "width": 390, "height": 844, "status": 47, "home": 34, "tabbar": 49, "navbar": 44 },
+ "frame_width": 390,
+ "frame_widths": { "00-design-system": 1440 },
+ "mobile_pattern": "",
+ "dark_pages": ["01-home"],
+ "brand_urls": {
+  "app-icon": "https://.../brand-assets/appname-icon/icon.png"
+ },
+ "forbidden": ["Old App Name", "DEK", "lorem", "Lorem"],
+ "inject": ["motion"],
+ "contract": "warn",
+ "eyebrows": false,
+ "reference_pages": ["00-design-system"],
+ "check_fonts": ["Inter"],
+ "routes": {
+  "01-home": "app/(tabs)/index.tsx",
+  "02-detail": "app/item/[id].tsx",
+  "03-library": "app/(tabs)/library.tsx",
+  "04-settings": "app/(tabs)/settings.tsx"
+ }
+}

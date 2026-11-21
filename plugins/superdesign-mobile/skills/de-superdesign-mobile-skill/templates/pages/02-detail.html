@@ -1,0 +1,31 @@
+<!-- title: Item | App name -->
+{{> head}}
+<div id="{{prefix}}-root" class="screen" data-screen="fixed">
+{{> navbar title="Morning routine" back="#home" back-label="Home" action="Save" action-href="#home" action-class=""}}
+<main id="main" class="flex-1">
+
+<!-- TIME: the big editable value -->
+<section data-block="time-picker" aria-label="Time" class="pad pt-4 text-center">
+  <p class="t-stat" data-placeholder>06:30</p>
+  <p class="mt-1 t-subhead text-fg-muted">Rings in 9 h 49 min</p>
+</section>
+
+<!-- SETTINGS: grouped rows; a row with a value links on, a row with a switch toggles -->
+<section data-block="settings-group" aria-labelledby="p02-options" class="pad">
+  <h2 id="p02-options" class="group-label">Options</h2>
+  <ul class="group" role="list" data-repeater="rows">
+    <li><a id="p02-repeat" href="#item-repeat" class="cell"><span class="flex-1 t-body">Repeat</span><span class="t-body text-fg-muted" data-placeholder>Weekdays</span><iconify-icon icon="ph:caret-right-bold" width="16" class="text-fg-muted" aria-hidden="true"></iconify-icon></a></li>
+    <li><a id="p02-sound" href="#item-sound" class="cell"><span class="flex-1 t-body">Sound</span><span class="t-body text-fg-muted" data-placeholder>Sunrise</span><iconify-icon icon="ph:caret-right-bold" width="16" class="text-fg-muted" aria-hidden="true"></iconify-icon></a></li>
+    <li class="cell"><span class="flex-1 t-body">Snooze</span><button type="button" class="switch" role="switch" aria-checked="false" aria-label="Snooze"></button></li>
+  </ul>
+</section>
+
+<!-- DANGER: destructive action, separated from the rest -->
+<section data-block="danger-zone" aria-label="Delete" class="pad mt-8">
+  <button type="button" class="btn-danger w-full" data-toast="Deleted">Delete item</button>
+</section>
+
+</main>
+{{> homebar}}
+</div>
+</body></html>

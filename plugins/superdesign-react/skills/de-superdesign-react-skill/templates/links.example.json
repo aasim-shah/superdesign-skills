@@ -1,0 +1,31 @@
+{
+ "_note": "Copy to .superdesign/src/links.json. Render-time link map (lib/sd.tsx): <A href=\"#hash\"> becomes a live draft URL (ids from drafts.json). A link to its own page keeps its #hash when that id exists on the page. Lookup order: id, page, hash, prefix; an id mapped to null keeps the hash on purpose and is never a dead end. mobile.map sends links on mobile pages to the mobile twin. Buttons and forms that navigate call go(useHref('#hash')).",
+ "base": "https://p.superdesign.dev/draft/",
+ "id": {
+  "pal-all": "11-search-404"
+ },
+ "page": {
+  "07-contact": { "#send": "08-contact-sent" }
+ },
+ "hash": {
+  "#design-system": "00-design-system",
+  "#home": "01-home",
+  "#services": "02-services",
+  "#pricing": "03-pricing",
+  "#locations": "04-locations",
+  "#location": "05-location",
+  "#about": "06-about",
+  "#contact": "07-contact",
+  "#faq": "09-faq",
+  "#legal": "10-legal",
+  "#search": "11-search-404",
+  "#menu": "13-mobile-menu"
+ },
+ "prefix": {
+  "#location-": "05-location"
+ },
+ "mobile": {
+  "pages": ["12-mobile-home", "13-mobile-menu"],
+  "map": { "01-home": "12-mobile-home" }
+ }
+}

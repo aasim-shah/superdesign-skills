@@ -1,0 +1,18 @@
+<!-- MOTION · injected before </body> (config "inject": ["motion"]). Screens are static on load, so every canvas
+     thumbnail is the finished screen. Motion plays only after a tap in the prototype: navkit stores how the visitor
+     arrived (push, back or tab) and this layer plays the matching transition once. Sheets slide up in CSS (head),
+     buttons press in CSS. Nothing loops. prefers-reduced-motion gets nothing.
+     Handoff: push and back are the native stack transitions; tab is a 180ms cross-fade; sheets are formSheet or
+     @gorhom/bottom-sheet; presses use Pressable with a Reanimated scale (0.97, 150ms). -->
+<script>
+(function () {
+  var kind = null;
+  try { kind = sessionStorage.getItem('sd-nav'); sessionStorage.removeItem('sd-nav'); } catch (e) {}
+  if (!kind || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var main = document.querySelector('main');
+  if (!main || !main.animate) return;
+  var dx = kind === 'push' ? 36 : kind === 'back' ? -36 : 0;
+  main.animate([{ transform: 'translateX(' + dx + 'px)', opacity: kind === 'tab' ? 0 : 0.35 }, { transform: 'none', opacity: 1 }],
+    { duration: kind === 'tab' ? 180 : 320, easing: 'cubic-bezier(.2,.8,.2,1)' });
+})();
+</script>

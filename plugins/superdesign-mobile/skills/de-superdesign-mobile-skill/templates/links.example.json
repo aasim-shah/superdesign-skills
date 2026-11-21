@@ -1,0 +1,23 @@
+{
+ "_note": "Copy to .superdesign/src/links.json. Build-time link map: #hash placeholders become live draft URLs (ids from drafts.json). A link to its own screen keeps its #hash when that anchor exists. Lookup order: id, page, hash, prefix; an id mapped to null keeps the hash on purpose. Dark twins (<page>--dark) link to dark twins automatically. buttons wires a <button> by its label (a form's submit to its confirmation screen).",
+ "base": "https://p.superdesign.dev/draft/",
+ "id": {
+  "nav-action": null
+ },
+ "page": {
+  "02-detail": { "#back": "01-home" }
+ },
+ "hash": {
+  "#design-system": "00-design-system",
+  "#home": "01-home",
+  "#item": "02-detail",
+  "#library": "03-library",
+  "#settings": "04-settings"
+ },
+ "prefix": {
+  "#item-": "02-detail"
+ },
+ "buttons": {
+  "02-detail": { "Save": "01-home" }
+ }
+}

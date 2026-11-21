@@ -1,0 +1,51 @@
+<!-- title: Design system | App name -->
+{{> head}}
+<div id="{{prefix}}-root" class="screen bg-bg" data-screen="scroll">
+<main id="main" class="mx-auto w-full max-w-[1280px] px-10 py-16">
+<!-- The board: 1440 wide (config frame_widths), a reference page (no handoff checks, not in the inventory).
+     Colors and type come from tokens.json through {{board:colors}} and {{board:type}}, so they cannot drift.
+     Add each brand device in its resting state and every component in its states, light and dark. -->
+<section data-block="board-cover" aria-labelledby="p00-title">
+  <h1 id="p00-title" class="t-large-title">Design system</h1>
+  <p class="mt-2 max-w-[60ch] t-body text-fg-muted">Tokens, type, components and states for every screen, built from tokens.json and the same partials as the screens.</p>
+</section>
+<section data-block="board-color" aria-labelledby="p00-color" class="mt-14">
+  <h2 id="p00-color" class="t-title1">Color</h2>
+  <div class="mt-6">{{board:colors}}</div>
+</section>
+<section data-block="board-type" aria-labelledby="p00-type" class="mt-14">
+  <h2 id="p00-type" class="t-title1">Type (points; rem in drafts, so large text scales)</h2>
+  <div class="mt-6">{{board:type}}</div>
+</section>
+<section data-block="board-components" aria-labelledby="p00-comp" class="mt-14">
+  <h2 id="p00-comp" class="t-title1">Components</h2>
+  <div class="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2">
+    <div class="rounded-xl bg-bg p-6 ring-1 ring-line">
+      <div class="flex flex-wrap items-center gap-3">
+        <button type="button" class="btn-primary">Primary</button>
+        <button type="button" class="btn-secondary">Secondary</button>
+        <button type="button" class="btn-plain">Plain</button>
+        <button type="button" class="btn-danger">Delete</button>
+      </div>
+      <div class="mt-6 flex flex-wrap items-center gap-3" data-chips>
+        <button type="button" class="chip" aria-pressed="true">Selected</button><button type="button" class="chip" aria-pressed="false">Chip</button>
+        <button type="button" class="switch" role="switch" aria-checked="true" aria-label="On example"></button>
+        <button type="button" class="switch" role="switch" aria-checked="false" aria-label="Off example"></button>
+      </div>
+      <div class="segment mt-6 max-w-[320px]" data-segment role="group" aria-label="Segment example"><button type="button" aria-pressed="true">One</button><button type="button" aria-pressed="false">Two</button><button type="button" aria-pressed="false">Three</button></div>
+      <ul class="group mt-6" role="list"><li class="cell"><span class="cell-icon"><iconify-icon icon="ph:bell-fill" width="18" aria-hidden="true"></iconify-icon></span><span class="flex-1 t-body">Cell</span><span class="t-body text-fg-muted">Value</span></li><li class="cell"><span class="flex-1 t-body">Cell with switch</span><button type="button" class="switch" role="switch" aria-checked="true" aria-label="Cell example"></button></li></ul>
+    </div>
+    <div class="dark rounded-xl bg-bg p-6 text-fg">
+      <div class="flex flex-wrap items-center gap-3">
+        <button type="button" class="btn-primary">Primary</button>
+        <button type="button" class="btn-secondary">Secondary</button>
+        <button type="button" class="btn-plain">Plain</button>
+        <button type="button" class="btn-danger">Delete</button>
+      </div>
+      <ul class="group mt-6" role="list"><li class="cell"><span class="cell-icon"><iconify-icon icon="ph:bell-fill" width="18" aria-hidden="true"></iconify-icon></span><span class="flex-1 t-body">Cell</span><span class="t-body text-fg-muted">Value</span></li><li class="cell"><span class="flex-1 t-body">Cell with switch</span><button type="button" class="switch" role="switch" aria-checked="true" aria-label="Dark cell example"></button></li></ul>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+</body></html>
